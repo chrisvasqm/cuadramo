@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "372644659735",
+    "firebase_url": "https://cuadramo-2ed28.firebaseio.com",
+    "project_id": "cuadramo-2ed28",
+    "storage_bucket": "cuadramo-2ed28.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:372644659735:android:9248d6ca36172331",
+        "android_client_info": {
+          "package_name": "com.chrisvasqm.cuadramo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "372644659735-6e5s3q55ki1cmupebbb4tldfpo993usr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.chrisvasqm.cuadramo",
+            "certificate_hash": "d891b2386720d19c48b6f54c8bf4116625c988f5"
+          }
+        },
+        {
+          "client_id": "372644659735-4nvdlkof9lje7olcl2a6dtauf4gtila6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.chrisvasqm.cuadramo",
+            "certificate_hash": "e5bbd5093bbb2e370fcd176fae653fe5d7ff79ea"
+          }
+        },
+        {
+          "client_id": "372644659735-gqp34qcpki9mjmpfp75aue359fkfef4g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVwH5ADCX_it4U26U7tK9d5E_nTGz8CVs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "372644659735-gqp34qcpki9mjmpfp75aue359fkfef4g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
