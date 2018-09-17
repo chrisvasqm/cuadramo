@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Cuadramo</string>
+    <string name="welcome">Welcome</string>
+    <string name="choose_your_favorite_sign_in_option">Choose your favorite sign-in option</string>
 </resources>
