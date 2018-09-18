@@ -63,6 +63,7 @@ class SignInActivity : AppCompatActivity() {
                 val account = task?.getResult(ApiException::class.java)
                 firebaseAuthWithGoogle(account)
             } catch (exception: ApiException) {
+                Log.w(TAG, "Google Sign In failed: $exception")
                 Snackbar.make(signInLayout, "Google sign in failed.", Snackbar.LENGTH_LONG).show()
             }
         }
@@ -87,14 +88,15 @@ class SignInActivity : AppCompatActivity() {
     }
 
     private fun updateUI(account: FirebaseUser?) {
-        if (account != null) goToMainActivity()
+        val isLoggedIn = account != null
+        if (isLoggedIn) goToMainActivity()
     }
 
     private fun goToMainActivity() {
         val intent = Intent(this, MainActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
         }
         startActivity(intent)
+        finish()
     }
 }
