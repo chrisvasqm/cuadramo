@@ -1,10 +1,12 @@
-package com.chrisvasqm.cuadramo
+package com.chrisvasqm.cuadramo.signin
 
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import com.chrisvasqm.cuadramo.CatalogActivity
+import com.chrisvasqm.cuadramo.R
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -15,9 +17,11 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.android.synthetic.main.activity_sign_in.*
 
-class SignInActivity : AppCompatActivity() {
+class SignInActivity : AppCompatActivity(), SignInContract.View {
 
     private val TAG: String = this::class.java.simpleName
+
+    private lateinit var presenter: SignInContract.Presenter
 
     private val RC_SIGN_IN: Int = 9001
 
@@ -28,6 +32,7 @@ class SignInActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
+        presenter = SignInPresenter(this)
 
         auth = FirebaseAuth.getInstance()
 
@@ -38,19 +43,32 @@ class SignInActivity : AppCompatActivity() {
 
         client = GoogleSignIn.getClient(this, gso)
 
-        btnSignIn.setOnClickListener { signIn() }
+        btnSignIn.setOnClickListener { presenter.signIn() }
     }
 
     override fun onStart() {
         super.onStart()
 
         val currentUser = auth.currentUser
-        updateUI(currentUser)
+        presenter.updateUi(currentUser)
     }
 
-    private fun signIn() {
+    override fun signIn() {
         val intent = client.signInIntent
         startActivityForResult(intent, RC_SIGN_IN)
+    }
+
+    override fun updateUi(user: FirebaseUser?) {
+        val isLoggedIn = user != null
+        if (isLoggedIn) goToCatalog()
+    }
+
+    override fun goToCatalog() {
+        val intent = Intent(this, CatalogActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+        }
+        startActivity(intent)
+        finish()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -78,25 +96,13 @@ class SignInActivity : AppCompatActivity() {
                     if (task.isSuccessful) {
                         Log.d(TAG, "signInWithCredential:success")
                         val user = auth.currentUser
-                        updateUI(user)
+                        presenter.updateUi(user)
                     } else {
                         Log.w(TAG, "signInWithCredential:failure", task.exception)
                         Snackbar.make(signInLayout, "Authentication Failed.", Snackbar.LENGTH_SHORT).show()
-                        updateUI(null)
+                        presenter.updateUi(null)
                     }
                 }
     }
 
-    private fun updateUI(account: FirebaseUser?) {
-        val isLoggedIn = account != null
-        if (isLoggedIn) goToMainActivity()
-    }
-
-    private fun goToMainActivity() {
-        val intent = Intent(this, CatalogActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
-        }
-        startActivity(intent)
-        finish()
-    }
 }
