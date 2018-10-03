@@ -8,33 +8,23 @@ import android.util.Log
 import com.chrisvasqm.cuadramo.CatalogActivity
 import com.chrisvasqm.cuadramo.R
 import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.android.synthetic.main.activity_sign_in.*
 
 class SignInActivity : AppCompatActivity(), SignInContract.View {
 
     private val TAG: String = this::class.java.simpleName
-
-    private lateinit var presenter: SignInContract.Presenter
-
     private val RC_SIGN_IN: Int = 9001
-
+    private lateinit var presenter: SignInContract.Presenter
     private lateinit var client: GoogleSignInClient
-
-    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
         presenter = SignInPresenter(this)
-
-        auth = FirebaseAuth.getInstance()
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -49,8 +39,7 @@ class SignInActivity : AppCompatActivity(), SignInContract.View {
     override fun onStart() {
         super.onStart()
 
-        val currentUser = auth.currentUser
-        presenter.updateUi(currentUser)
+        presenter.updateUi()
     }
 
     override fun signIn() {
@@ -71,6 +60,22 @@ class SignInActivity : AppCompatActivity(), SignInContract.View {
         finish()
     }
 
+    override fun logAccountId(id: String?) {
+        Log.d(TAG, "authWithGoogle: $id")
+    }
+
+    override fun logLoginSuccessfully() {
+        Log.d(TAG, "signInWithCredential: success")
+    }
+
+    override fun logLoginFailure(exception: Exception?) {
+        Log.w(TAG, "signInWithCredential:failure", exception)
+    }
+
+    override fun showMessage(message: String) {
+        Snackbar.make(signInLayout, message, Snackbar.LENGTH_SHORT).show()
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -79,30 +84,12 @@ class SignInActivity : AppCompatActivity(), SignInContract.View {
 
             try {
                 val account = task?.getResult(ApiException::class.java)
-                firebaseAuthWithGoogle(account)
+                presenter.authWithGoogle(account)
             } catch (exception: ApiException) {
                 Log.w(TAG, "Google Sign In failed: $exception")
                 Snackbar.make(signInLayout, "Google sign in failed.", Snackbar.LENGTH_LONG).show()
             }
         }
-    }
-
-    private fun firebaseAuthWithGoogle(account: GoogleSignInAccount?) {
-        Log.d(TAG, "firebaseAuthWithGoogle:" + account?.id)
-
-        val credential = GoogleAuthProvider.getCredential(account?.idToken, null)
-        auth.signInWithCredential(credential)
-                .addOnCompleteListener(this) { task ->
-                    if (task.isSuccessful) {
-                        Log.d(TAG, "signInWithCredential:success")
-                        val user = auth.currentUser
-                        presenter.updateUi(user)
-                    } else {
-                        Log.w(TAG, "signInWithCredential:failure", task.exception)
-                        Snackbar.make(signInLayout, "Authentication Failed.", Snackbar.LENGTH_SHORT).show()
-                        presenter.updateUi(null)
-                    }
-                }
     }
 
 }
