@@ -4,8 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.chrisvasqm.cuadramo.CatalogActivity
 import com.chrisvasqm.cuadramo.R
+import com.chrisvasqm.cuadramo.catalog.CatalogActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -25,7 +25,7 @@ class SignInActivity : AppCompatActivity(), SignInContract.View {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
-        presenter = SignInPresenter(this)
+        presenter = SignInPresenter().apply { attach(this@SignInActivity) }
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -35,6 +35,11 @@ class SignInActivity : AppCompatActivity(), SignInContract.View {
         client = GoogleSignIn.getClient(this, gso)
 
         btnSignIn.setOnClickListener { presenter.signIn() }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.detach()
     }
 
     override fun onStart() {
