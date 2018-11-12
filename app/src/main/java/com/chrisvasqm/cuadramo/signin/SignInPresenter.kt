@@ -8,7 +8,7 @@ import com.google.firebase.auth.GoogleAuthProvider
 class SignInPresenter(private val view: SignInContract.View) : SignInContract.Presenter {
 
     private val auth = FirebaseAuth.getInstance()
-    private val repository = UserRepository()
+    private val repository = UserRepository
 
     override fun signIn() {
         view.signIn()
@@ -22,18 +22,16 @@ class SignInPresenter(private val view: SignInContract.View) : SignInContract.Pr
         view.logAccountId(account?.id)
 
         val credential = GoogleAuthProvider.getCredential(account?.idToken, null)
-        FirebaseAuth
-                .getInstance()
-                .signInWithCredential(credential)
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        view.logLoginSuccessfully()
-                        view.updateUi(auth.currentUser)
-                    } else {
-                        view.logLoginFailure(task.exception)
-                        view.showMessage("Authentication failed.")
-                        view.updateUi(null)
-                    }
+        auth.signInWithCredential(credential)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    view.logLoginSuccessfully()
+                    view.updateUi(auth.currentUser)
+                } else {
+                    view.logLoginFailure(task.exception)
+                    view.showMessage("Authentication failed.")
+                    view.updateUi(null)
                 }
+            }
     }
 }
