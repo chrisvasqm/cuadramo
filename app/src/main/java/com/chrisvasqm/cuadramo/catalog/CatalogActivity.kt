@@ -1,4 +1,4 @@
-package com.chrisvasqm.cuadramo
+package com.chrisvasqm.cuadramo.catalog
 
 import android.content.DialogInterface
 import android.os.Bundle
@@ -6,22 +6,27 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.chrisvasqm.cuadramo.R
+import com.chrisvasqm.cuadramo.data.models.Cuadre
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.toolbar.*
 
-class CatalogActivity : AppCompatActivity() {
+class CatalogActivity : AppCompatActivity(), CatalogContract.View {
 
     private lateinit var auth: FirebaseAuth
 
     private lateinit var client: GoogleSignInClient
 
+    private lateinit var presenter: CatalogContract.Presenter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_catalog)
         setSupportActionBar(toolbar)
+        presenter = CatalogPresenter().apply { attach(this@CatalogActivity) }
 
         auth = FirebaseAuth.getInstance()
 
@@ -40,22 +45,29 @@ class CatalogActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
-            R.id.item_sign_out -> signOut()
+            R.id.item_sign_out -> presenter.signOut()
         }
         return super.onOptionsItemSelected(item)
     }
 
-    private fun signOut() {
-        AlertDialog.Builder(this).apply {
-            setTitle(R.string.sign_out)
-            setMessage(getString(R.string.have_to_sign_in_again))
-            setPositiveButton(R.string.sign_out) { _: DialogInterface, _: Int ->
-                client.signOut().addOnCompleteListener {
-                    auth.signOut()
-                    finish()
-                }
+    override fun showCatalog(cuadres: MutableList<Cuadre>) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun showSignOutDialog() {
+        val dialog = setupSignOutDialog()
+        dialog.show()
+    }
+
+    private fun setupSignOutDialog(): AlertDialog.Builder = AlertDialog.Builder(this).apply {
+        setTitle(R.string.sign_out)
+        setMessage(getString(R.string.have_to_sign_in_again))
+        setPositiveButton(R.string.sign_out) { _: DialogInterface, _: Int ->
+            client.signOut().addOnCompleteListener {
+                auth.signOut()
+                finish()
             }
-            setNegativeButton(android.R.string.cancel) { _: DialogInterface, _: Int -> }
-        }.show()
+        }
+        setNegativeButton(android.R.string.cancel) { _: DialogInterface, _: Int -> }
     }
 }
