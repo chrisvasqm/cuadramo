@@ -17,8 +17,11 @@ import kotlinx.android.synthetic.main.activity_sign_in.*
 class SignInActivity : AppCompatActivity(), SignInContract.View {
 
     private val TAG: String = this::class.java.simpleName
+
     private val RC_SIGN_IN: Int = 9001
+
     private lateinit var presenter: SignInContract.Presenter
+
     private lateinit var client: GoogleSignInClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
