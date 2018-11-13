@@ -6,17 +6,12 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.chrisvasqm.cuadramo.R
 import com.chrisvasqm.cuadramo.data.models.Cuadre
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import kotlinx.android.synthetic.main.activity_catalog.*
 import kotlinx.android.synthetic.main.toolbar.*
 
 class CatalogActivity : AppCompatActivity(), CatalogContract.View {
@@ -27,22 +22,11 @@ class CatalogActivity : AppCompatActivity(), CatalogContract.View {
 
     private lateinit var presenter: CatalogContract.Presenter
 
-    private lateinit var router: CatalogContract.Router
-
-    private lateinit var firebaseDatabase: FirebaseDatabase
-
-    private lateinit var databaseReference: DatabaseReference
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_catalog)
         setSupportActionBar(toolbar)
         presenter = CatalogPresenter().apply { attach(this@CatalogActivity) }
-        presenter.loadCatalog()
-        router = CatalogRouter(this)
-
-        firebaseDatabase = FirebaseDatabase.getInstance()
-        databaseReference = firebaseDatabase.getReference()
 
         auth = FirebaseAuth.getInstance()
 
@@ -52,15 +36,6 @@ class CatalogActivity : AppCompatActivity(), CatalogContract.View {
                 .build()
 
         client = GoogleSignIn.getClient(this, gso)
-
-        fabAdd.setOnClickListener {
-            router.goToEditorScreen()
-        }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        presenter.detach()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -76,16 +51,7 @@ class CatalogActivity : AppCompatActivity(), CatalogContract.View {
     }
 
     override fun showCatalog(cuadres: MutableList<Cuadre>) {
-        setupRecyclerView(cuadres)
-    }
-
-    private fun setupRecyclerView(cuadres: MutableList<Cuadre>) {
-        catalogRecyclerView.apply {
-            setHasFixedSize(true)
-            adapter = CatalogAdapter(cuadres)
-            layoutManager = LinearLayoutManager(this@CatalogActivity)
-            addItemDecoration(DividerItemDecoration(this@CatalogActivity, DividerItemDecoration.VERTICAL))
-        }
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun showSignOutDialog() {
