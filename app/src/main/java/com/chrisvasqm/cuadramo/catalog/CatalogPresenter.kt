@@ -1,5 +1,7 @@
 package com.chrisvasqm.cuadramo.catalog
 
+import com.chrisvasqm.cuadramo.data.models.Cuadre
+
 class CatalogPresenter : CatalogContract.Presenter {
 
     private var view: CatalogContract.View? = null
@@ -13,7 +15,26 @@ class CatalogPresenter : CatalogContract.Presenter {
     }
 
     override fun loadCatalog() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        view?.showCatalog(mutableListOf(
+                Cuadre(
+                        300,
+                        10,
+                        2,
+                        100,
+                        2,
+                        150,
+                        50
+                ),
+                Cuadre(
+                        300,
+                        10,
+                        2,
+                        100,
+                        2,
+                        150,
+                        50
+                )
+        ))
     }
 
     override fun signOut() {
