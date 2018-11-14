@@ -3,4 +3,5 @@
     <string name="welcome">Welcome</string>
     <string name="sign_out">Sign out</string>
     <string name="have_to_sign_in_again">You will have to sign in back again</string>
+    <string name="catalog">Catalog</string>
 </resources>
