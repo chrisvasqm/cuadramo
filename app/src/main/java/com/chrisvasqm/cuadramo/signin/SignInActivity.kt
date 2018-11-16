@@ -22,6 +22,7 @@ class SignInActivity : AppCompatActivity(), SignInContract.View {
     private lateinit var client: GoogleSignInClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
         presenter = SignInPresenter(this)
