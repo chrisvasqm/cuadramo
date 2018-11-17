@@ -14,6 +14,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_catalog.*
 import kotlinx.android.synthetic.main.toolbar.*
 
@@ -25,12 +27,19 @@ class CatalogActivity : AppCompatActivity(), CatalogContract.View {
 
     private lateinit var presenter: CatalogContract.Presenter
 
+    private lateinit var firebaseDatabase: FirebaseDatabase
+
+    private lateinit var databaseReference: DatabaseReference
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_catalog)
         setSupportActionBar(toolbar)
         presenter = CatalogPresenter().apply { attach(this@CatalogActivity) }
         presenter.loadCatalog()
+
+        firebaseDatabase = FirebaseDatabase.getInstance()
+        databaseReference = firebaseDatabase.getReference()
 
         auth = FirebaseAuth.getInstance()
 
@@ -40,6 +49,18 @@ class CatalogActivity : AppCompatActivity(), CatalogContract.View {
                 .build()
 
         client = GoogleSignIn.getClient(this, gso)
+
+        fabAdd.setOnClickListener {
+            val userId = auth.currentUser?.uid
+            if (userId != null) {
+                databaseReference
+                        .child("users")
+                        .child(userId)
+                        .child("cuadres")
+                        .push()
+                        .setValue(Cuadre(0, 0, 0, 0, 0, 0, 0))
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
