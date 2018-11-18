@@ -4,4 +4,12 @@
     <string name="sign_out">Sign out</string>
     <string name="have_to_sign_in_again">You will have to sign in back again</string>
     <string name="catalog">Catalog</string>
+    <string name="editor">Editor</string>
+    <string name="cash">Cash</string>
+    <string name="tickets_left">Tickets left</string>
+    <string name="tickets_total">Tickets total</string>
+    <string name="food">Food</string>
+    <string name="freebies">Freebies</string>
+    <string name="delivery">Delivery</string>
+    <string name="others">Others</string>
 </resources>

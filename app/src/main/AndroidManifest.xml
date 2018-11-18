@@ -24,6 +24,9 @@
             android:name=".catalog.CatalogActivity"
             android:label="@string/catalog"
             android:parentActivityName=".signin.SignInActivity" />
+        <activity
+            android:name=".editor.EditorActivity"
+            android:label="@string/editor"></activity>
     </application>
 
 </manifest>
