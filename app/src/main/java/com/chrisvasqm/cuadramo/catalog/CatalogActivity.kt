@@ -27,6 +27,8 @@ class CatalogActivity : AppCompatActivity(), CatalogContract.View {
 
     private lateinit var presenter: CatalogContract.Presenter
 
+    private lateinit var router: CatalogContract.Router
+
     private lateinit var firebaseDatabase: FirebaseDatabase
 
     private lateinit var databaseReference: DatabaseReference
@@ -37,6 +39,7 @@ class CatalogActivity : AppCompatActivity(), CatalogContract.View {
         setSupportActionBar(toolbar)
         presenter = CatalogPresenter().apply { attach(this@CatalogActivity) }
         presenter.loadCatalog()
+        router = CatalogRouter(this)
 
         firebaseDatabase = FirebaseDatabase.getInstance()
         databaseReference = firebaseDatabase.getReference()
@@ -51,16 +54,13 @@ class CatalogActivity : AppCompatActivity(), CatalogContract.View {
         client = GoogleSignIn.getClient(this, gso)
 
         fabAdd.setOnClickListener {
-            val userId = auth.currentUser?.uid
-            if (userId != null) {
-                databaseReference
-                        .child("users")
-                        .child(userId)
-                        .child("cuadres")
-                        .push()
-                        .setValue(Cuadre(0, 0, 0, 0, 0, 0, 0))
-            }
+            router.goToEditorScreen()
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.detach()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
