@@ -30,7 +30,6 @@
         android:layout_marginBottom="16dp"
         android:clickable="true"
         android:focusable="false"
-        app:backgroundTint="@color/colorAccent"
         app:fabSize="normal"
         app:rippleColor="@android:color/white"
         app:srcCompat="@drawable/ic_add_white_24dp"
