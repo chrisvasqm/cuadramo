@@ -31,6 +31,7 @@
         android:clickable="true"
         android:focusable="false"
         app:fabSize="normal"
+        app:tint="@android:color/white"
         app:rippleColor="@android:color/white"
         app:srcCompat="@drawable/ic_add_white_24dp"
         app:tint="@android:color/white" />
