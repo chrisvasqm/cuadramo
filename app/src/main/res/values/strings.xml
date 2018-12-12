@@ -12,4 +12,6 @@
     <string name="freebies">Freebies</string>
     <string name="delivery">Delivery</string>
     <string name="others">Others</string>
+    <string name="cuadrar">Cuadrar</string>
+    <string name="clear">Limpiar</string>
 </resources>
