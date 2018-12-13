@@ -13,10 +13,13 @@ interface EditorContract {
         fun getFreebies(): Int
         fun getDelivery(): Int
         fun getOthers(): Int
+
+        fun clearForm()
     }
 
     interface Presenter : BasePresenter<View> {
         fun save(cuadre: Cuadre)
+        fun clearForm()
     }
 
     interface Router {
