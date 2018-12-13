@@ -3,10 +3,11 @@ package com.chrisvasqm.cuadramo.editor
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.chrisvasqm.cuadramo.R
+import com.chrisvasqm.cuadramo.extensions.toInt
+import kotlinx.android.synthetic.main.activity_editor.*
 import kotlinx.android.synthetic.main.toolbar.*
 
 class EditorActivity : AppCompatActivity(), EditorContract.View {
-
     private lateinit var presenter: EditorContract.Presenter
 
     private lateinit var router: EditorContract.Router
@@ -23,4 +24,20 @@ class EditorActivity : AppCompatActivity(), EditorContract.View {
         super.onDestroy()
         presenter.detach()
     }
+
+    override fun getCash(): Int = inputCash.text.toInt()
+
+    override fun getTicketsTotal(): Int = inputTicketsTotal.text.toInt()
+
+    override fun getTicketsLeft(): Int = inputTicketsLeft.text.toInt()
+
+    override fun getFood(): Int = inputFood.text.toInt()
+
+    override fun getFreebies(): Int = inputFreebies.text.toInt()
+
+    override fun getDelivery(): Int = inputDelivery.text.toInt()
+
+    override fun getOthers(): Int = inputOthers.text.toInt()
+
 }
+
