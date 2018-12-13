@@ -15,6 +15,9 @@ interface EditorContract {
         fun getOthers(): Int
 
         fun clearForm()
+        fun displayUndoMessage()
+        fun saveTemporaryCuadre()
+        fun restoreForm()
     }
 
     interface Presenter : BasePresenter<View> {
