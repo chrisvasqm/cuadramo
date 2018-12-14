@@ -27,6 +27,7 @@ class EditorActivity : AppCompatActivity(), EditorContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_editor)
         setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         presenter = EditorPresenter().apply { attach(this@EditorActivity) }
         router = EditorRouter(this)
 
