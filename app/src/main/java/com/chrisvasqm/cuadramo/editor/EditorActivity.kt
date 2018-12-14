@@ -30,7 +30,14 @@ class EditorActivity : AppCompatActivity(), EditorContract.View {
         override fun afterTextChanged(s: Editable?) {}
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
         override fun onTextChanged(text: CharSequence?, start: Int, before: Int, count: Int) {
-            btnClear.isEnabled = !text.isNullOrBlank()
+            val isAnyFieldFilled: Boolean = inputCash.text?.isNotBlank()!! ||
+                    inputTicketsTotal.text?.isNotBlank()!! ||
+                    inputTicketsLeft.text?.isNotBlank()!! ||
+                    inputFood.text?.isNotBlank()!! ||
+                    inputFreebies.text?.isNotBlank()!! ||
+                    inputDelivery.text?.isNotBlank()!! ||
+                    inputOthers.text?.isNotBlank()!!
+            btnClear.isEnabled = isAnyFieldFilled
         }
     }
 
