@@ -21,7 +21,7 @@ class EditorActivity : AppCompatActivity(), EditorContract.View {
 
     private lateinit var router: EditorContract.Router
 
-    private var undoCuadre: Cuadre? = null
+    private var undoCuadre = Cuadre()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -90,13 +90,13 @@ class EditorActivity : AppCompatActivity(), EditorContract.View {
     }
 
     override fun restoreForm() {
-        inputCash.setText(undoCuadre?.cash.toString())
-        inputTicketsTotal.setText(undoCuadre?.ticketsTotal.toString())
-        inputTicketsLeft.setText(undoCuadre?.ticketsLeft.toString())
-        inputFood.setText(undoCuadre?.food.toString())
-        inputFreebies.setText(undoCuadre?.freebies.toString())
-        inputDelivery.setText(undoCuadre?.delivery.toString())
-        inputOthers.setText(undoCuadre?.extras.toString())
+        inputCash.setText(undoCuadre.cash.toString())
+        inputTicketsTotal.setText(undoCuadre.ticketsTotal.toString())
+        inputTicketsLeft.setText(undoCuadre.ticketsLeft.toString())
+        inputFood.setText(undoCuadre.food.toString())
+        inputFreebies.setText(undoCuadre.freebies.toString())
+        inputDelivery.setText(undoCuadre.delivery.toString())
+        inputOthers.setText(undoCuadre.extras.toString())
     }
 
 }

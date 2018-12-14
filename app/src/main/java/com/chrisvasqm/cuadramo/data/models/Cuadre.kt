@@ -3,13 +3,13 @@ package com.chrisvasqm.cuadramo.data.models
 private const val TICKET_COST = 50
 
 data class Cuadre(
-        var cash: Int,
-        var ticketsTotal: Int,
-        var ticketsLeft: Int,
-        var food: Int,
-        var freebies: Int,
-        var delivery: Int,
-        var extras: Int
+        var cash: Int = 0,
+        var ticketsTotal: Int = 0,
+        var ticketsLeft: Int = 0,
+        var food: Int = 0,
+        var freebies: Int = 0,
+        var delivery: Int = 0,
+        var extras: Int = 0
 ) {
 
     val revenue: Int
