@@ -1,6 +1,8 @@
 package com.chrisvasqm.cuadramo.editor
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 
 
 import android.view.ViewGroup
@@ -17,11 +19,20 @@ import kotlinx.android.synthetic.main.activity_editor.*
 import kotlinx.android.synthetic.main.toolbar.*
 
 class EditorActivity : AppCompatActivity(), EditorContract.View {
+
     private lateinit var presenter: EditorContract.Presenter
 
     private lateinit var router: EditorContract.Router
 
     private var undoCuadre = Cuadre()
+
+    private val clearWatcher = object : TextWatcher {
+        override fun afterTextChanged(s: Editable?) {}
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+        override fun onTextChanged(text: CharSequence?, start: Int, before: Int, count: Int) {
+            btnClear.isEnabled = !text.isNullOrBlank()
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +43,18 @@ class EditorActivity : AppCompatActivity(), EditorContract.View {
         router = EditorRouter(this)
 
         btnClear.setOnClickListener { presenter.clearForm() }
+
+        setupClearButtonWatcher()
+    }
+
+    private fun setupClearButtonWatcher() {
+        inputCash.addTextChangedListener(clearWatcher)
+        inputTicketsTotal.addTextChangedListener(clearWatcher)
+        inputTicketsLeft.addTextChangedListener(clearWatcher)
+        inputFood.addTextChangedListener(clearWatcher)
+        inputFreebies.addTextChangedListener(clearWatcher)
+        inputDelivery.addTextChangedListener(clearWatcher)
+        inputOthers.addTextChangedListener(clearWatcher)
     }
 
     override fun onDestroy() {
