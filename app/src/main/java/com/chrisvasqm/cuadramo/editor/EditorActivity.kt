@@ -34,6 +34,14 @@ class EditorActivity : AppCompatActivity(), EditorContract.View {
         }
     }
 
+    private val cuadrarWatcher = object : TextWatcher {
+        override fun afterTextChanged(s: Editable?) {}
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            btnCuadrar.isEnabled = inputTicketsTotal.text.toInt() > inputTicketsLeft.text.toInt()
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_editor)
@@ -45,6 +53,12 @@ class EditorActivity : AppCompatActivity(), EditorContract.View {
         btnClear.setOnClickListener { presenter.clearForm() }
 
         setupClearButtonWatcher()
+        setupCuadrarButtonWatcher()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.detach()
     }
 
     private fun setupClearButtonWatcher() {
@@ -57,9 +71,9 @@ class EditorActivity : AppCompatActivity(), EditorContract.View {
         inputOthers.addTextChangedListener(clearWatcher)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        presenter.detach()
+    private fun setupCuadrarButtonWatcher() {
+        inputTicketsTotal.addTextChangedListener(cuadrarWatcher)
+        inputTicketsLeft.addTextChangedListener(cuadrarWatcher)
     }
 
     override fun getCash(): Int = inputCash.text.toInt()
