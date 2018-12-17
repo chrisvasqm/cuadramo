@@ -15,4 +15,12 @@
     <string name="cuadrar">Cuadrar</string>
     <string name="clear">Limpiar</string>
     <string name="fields_cleared">Fields cleared.</string>
+
+    <!-- Button Sheet -->
+    <string name="bottom_sheet_header">Details</string>
+    <string name="bottom_sheet_date">Date:</string>
+    <string name="bottom_sheet_cash">Cash:</string>
+    <string name="bottom_sheet_documents">Documents:</string>
+    <string name="bottom_sheet_expenses">Expenses:</string>
+    <string name="bottom_sheet_result">Result:</string>
 </resources>

@@ -1,0 +1,192 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bottomSheetPreviewConstraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/bottom_sheet_header"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imgCalendar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="28dp"
+        android:tint="@color/darkGreyBold"
+        android:tintMode="src_in"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:srcCompat="@drawable/ic_calendar_black_24dp" />
+
+    <TextView
+        android:id="@+id/labelDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:text="@string/bottom_sheet_date"
+        app:layout_constraintBottom_toBottomOf="@+id/imgCalendar"
+        app:layout_constraintStart_toEndOf="@+id/imgCalendar"
+        app:layout_constraintTop_toTopOf="@+id/imgCalendar" />
+
+    <TextView
+        android:id="@+id/textDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:text="TextView"
+        app:layout_constraintBaseline_toBaselineOf="@+id/labelDate"
+        app:layout_constraintStart_toEndOf="@+id/labelDate" />
+
+    <ImageView
+        android:id="@+id/imgCash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:tint="@color/darkGreyBold"
+        android:tintMode="src_in"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgCalendar"
+        app:srcCompat="@drawable/ic_money_black_24dp" />
+
+    <TextView
+        android:id="@+id/labelMoney"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:text="@string/bottom_sheet_cash"
+        app:layout_constraintBottom_toBottomOf="@+id/imgCash"
+        app:layout_constraintStart_toEndOf="@+id/imgCash"
+        app:layout_constraintTop_toTopOf="@+id/imgCash" />
+
+    <TextView
+        android:id="@+id/textCash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:text="TextView"
+        app:layout_constraintBaseline_toBaselineOf="@+id/labelMoney"
+        app:layout_constraintStart_toEndOf="@+id/labelMoney" />
+
+    <ImageView
+        android:id="@+id/imgDocument"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:tint="@color/darkGreyBold"
+        android:tintMode="src_in"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgCash"
+        app:srcCompat="@drawable/ic_document_black_24dp" />
+
+    <TextView
+        android:id="@+id/labelDocuments"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:text="@string/bottom_sheet_documents"
+        app:layout_constraintBottom_toBottomOf="@+id/imgDocument"
+        app:layout_constraintStart_toEndOf="@+id/imgDocument"
+        app:layout_constraintTop_toTopOf="@+id/imgDocument" />
+
+    <TextView
+        android:id="@+id/textDocuments"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:text="TextView"
+        app:layout_constraintBaseline_toBaselineOf="@+id/labelDocuments"
+        app:layout_constraintStart_toEndOf="@+id/labelDocuments" />
+
+    <ImageView
+        android:id="@+id/imgMoneyOff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:tint="@color/darkGreyBold"
+        android:tintMode="src_in"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgDocument"
+        app:srcCompat="@drawable/ic_money_off_black_24dp" />
+
+    <TextView
+        android:id="@+id/labelMoneyOff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:text="@string/bottom_sheet_expenses"
+        app:layout_constraintBottom_toBottomOf="@+id/imgMoneyOff"
+        app:layout_constraintStart_toEndOf="@+id/imgMoneyOff"
+        app:layout_constraintTop_toTopOf="@+id/imgMoneyOff" />
+
+    <TextView
+        android:id="@+id/textMoneyOff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:text="TextView"
+        app:layout_constraintBaseline_toBaselineOf="@+id/labelMoneyOff"
+        app:layout_constraintStart_toEndOf="@+id/labelMoneyOff" />
+
+    <ImageView
+        android:id="@+id/imgResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:tint="@color/darkGreyBold"
+        android:tintMode="src_in"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgMoneyOff"
+        app:srcCompat="@drawable/ic_monetization_on_black_24dp" />
+
+    <TextView
+        android:id="@+id/labelResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:text="@string/bottom_sheet_result"
+        app:layout_constraintBottom_toBottomOf="@+id/imgResult"
+        app:layout_constraintStart_toEndOf="@+id/imgResult"
+        app:layout_constraintTop_toTopOf="@+id/imgResult" />
+
+    <TextView
+        android:id="@+id/textResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:text="TextView"
+        app:layout_constraintBaseline_toBaselineOf="@+id/labelResult"
+        app:layout_constraintStart_toEndOf="@+id/labelResult" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
