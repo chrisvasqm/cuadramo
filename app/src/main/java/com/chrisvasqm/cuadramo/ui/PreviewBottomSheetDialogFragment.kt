@@ -25,6 +25,9 @@ class PreviewBottomSheetDialogFragment : BottomSheetDialogFragment() {
         val textExpenses = view?.findViewById<TextView>(R.id.textMoneyOff)
         textExpenses?.text = cuadre.expenses.toString()
 
+        val textResult = view?.findViewById<TextView>(R.id.textResult)
+        textResult?.text = cuadre.revenue.toString()
+
         return view
     }
 
