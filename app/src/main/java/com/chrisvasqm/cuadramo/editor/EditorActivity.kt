@@ -122,8 +122,9 @@ class EditorActivity : AppCompatActivity(), EditorContract.View {
     }
 
     override fun showPreview() {
-        val previewBottomSheet = PreviewBottomSheetDialogFragment.getInstance()
-        previewBottomSheet.show(supportFragmentManager, TAG)
+        PreviewBottomSheetDialogFragment()
+                .apply { addCuadre(Cuadre()) }
+                .show(supportFragmentManager, TAG)
     }
 
     override fun saveTemporaryCuadre() {
