@@ -1,5 +1,8 @@
 package com.chrisvasqm.cuadramo.data.models
 
+import com.chrisvasqm.cuadramo.extensions.getCurrentDateTime
+import java.util.*
+
 private const val TICKET_COST = 50
 
 data class Cuadre(
@@ -11,6 +14,8 @@ data class Cuadre(
         var delivery: Int = 0,
         var extras: Int = 0
 ) {
+
+    val createdAt: Date = getCurrentDateTime()
 
     val revenue: Int
         get() = (cash + (ticketsTotal - ticketsLeft) * TICKET_COST) - expenses
