@@ -3,6 +3,10 @@ package com.chrisvasqm.cuadramo.editor
 import com.chrisvasqm.cuadramo.data.models.Cuadre
 
 class EditorPresenter : EditorContract.Presenter {
+    override fun showPreview() {
+        view?.showPreview()
+    }
+
     private var view: EditorContract.View? = null
 
     override fun attach(view: EditorContract.View) {

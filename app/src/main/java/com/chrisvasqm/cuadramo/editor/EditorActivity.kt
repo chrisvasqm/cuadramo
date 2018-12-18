@@ -12,6 +12,7 @@ import com.chrisvasqm.cuadramo.R
 import com.chrisvasqm.cuadramo.data.models.Cuadre
 import com.chrisvasqm.cuadramo.extensions.clear
 import com.chrisvasqm.cuadramo.extensions.toInt
+import com.chrisvasqm.cuadramo.ui.PreviewBottomSheetDialogFragment
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -19,6 +20,8 @@ import kotlinx.android.synthetic.main.activity_editor.*
 import kotlinx.android.synthetic.main.toolbar.*
 
 class EditorActivity : AppCompatActivity(), EditorContract.View {
+
+    private val TAG = "EditorActivity"
 
     private lateinit var presenter: EditorContract.Presenter
 
@@ -58,6 +61,8 @@ class EditorActivity : AppCompatActivity(), EditorContract.View {
         router = EditorRouter(this)
 
         btnClear.setOnClickListener { presenter.clearForm() }
+
+        btnCuadrar.setOnClickListener { presenter.showPreview() }
 
         setupClearButtonWatcher()
         setupCuadrarButtonWatcher()
@@ -114,6 +119,11 @@ class EditorActivity : AppCompatActivity(), EditorContract.View {
 
             counter++
         }
+    }
+
+    override fun showPreview() {
+        val previewBottomSheet = PreviewBottomSheetDialogFragment.getInstance()
+        previewBottomSheet.show(supportFragmentManager, TAG)
     }
 
     override fun saveTemporaryCuadre() {

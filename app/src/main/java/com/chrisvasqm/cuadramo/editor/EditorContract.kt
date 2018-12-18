@@ -18,11 +18,13 @@ interface EditorContract {
         fun displayUndoMessage()
         fun saveTemporaryCuadre()
         fun restoreForm()
+        fun showPreview()
     }
 
     interface Presenter : BasePresenter<View> {
         fun save(cuadre: Cuadre)
         fun clearForm()
+        fun showPreview()
     }
 
     interface Router {
