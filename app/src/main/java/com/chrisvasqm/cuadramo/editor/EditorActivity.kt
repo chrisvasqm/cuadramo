@@ -20,7 +20,6 @@ import kotlinx.android.synthetic.main.activity_editor.*
 import kotlinx.android.synthetic.main.toolbar.*
 
 class EditorActivity : AppCompatActivity(), EditorContract.View {
-
     private val TAG = "EditorActivity"
 
     private lateinit var presenter: EditorContract.Presenter
@@ -88,19 +87,17 @@ class EditorActivity : AppCompatActivity(), EditorContract.View {
         inputTicketsLeft.addTextChangedListener(cuadrarWatcher)
     }
 
-    override fun getCash(): Int = inputCash.text.toInt()
-
-    override fun getTicketsTotal(): Int = inputTicketsTotal.text.toInt()
-
-    override fun getTicketsLeft(): Int = inputTicketsLeft.text.toInt()
-
-    override fun getFood(): Int = inputFood.text.toInt()
-
-    override fun getFreebies(): Int = inputFreebies.text.toInt()
-
-    override fun getDelivery(): Int = inputDelivery.text.toInt()
-
-    override fun getOthers(): Int = inputOthers.text.toInt()
+    override fun getCuadre(): Cuadre {
+        return Cuadre(
+                inputCash.text.toInt(),
+                inputTicketsTotal.text.toInt(),
+                inputTicketsLeft.text.toInt(),
+                inputFood.text.toInt(),
+                inputFreebies.text.toInt(),
+                inputDelivery.text.toInt(),
+                inputOthers.text.toInt()
+        )
+    }
 
     override fun clearForm() {
         saveTemporaryCuadre()
@@ -123,20 +120,12 @@ class EditorActivity : AppCompatActivity(), EditorContract.View {
 
     override fun showPreview() {
         PreviewBottomSheetDialogFragment()
-                .apply { addCuadre(Cuadre()) }
+                .apply { setCuadre(getCuadre()) }
                 .show(supportFragmentManager, TAG)
     }
 
     override fun saveTemporaryCuadre() {
-        undoCuadre = Cuadre(
-                inputCash.text.toInt(),
-                inputTicketsTotal.text.toInt(),
-                inputTicketsLeft.text.toInt(),
-                inputFood.text.toInt(),
-                inputFreebies.text.toInt(),
-                inputDelivery.text.toInt(),
-                inputOthers.text.toInt()
-        )
+        undoCuadre = getCuadre()
     }
 
     override fun displayUndoMessage() {
