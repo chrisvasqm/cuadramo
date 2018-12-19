@@ -5,10 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import com.chrisvasqm.cuadramo.R
 import com.chrisvasqm.cuadramo.data.models.Cuadre
 import com.chrisvasqm.cuadramo.extensions.toString
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.android.material.button.MaterialButton
 
 class PreviewBottomSheetDialogFragment : BottomSheetDialogFragment() {
 
@@ -31,6 +33,13 @@ class PreviewBottomSheetDialogFragment : BottomSheetDialogFragment() {
 
         val textResult = view?.findViewById<TextView>(R.id.textResult)
         textResult?.text = cuadre.revenue.toString()
+
+        val btnSave = view?.findViewById<MaterialButton>(R.id.btnSave)
+        btnSave?.setOnClickListener {
+            // TODO: change this to save the user to the Firebase Real-time Database
+            // and send the user back to the CatalogActivity when successful
+            Toast.makeText(activity?.applicationContext, "testing", Toast.LENGTH_LONG).show()
+        }
 
         return view
     }

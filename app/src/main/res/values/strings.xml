@@ -23,4 +23,5 @@
     <string name="bottom_sheet_documents">Documents:</string>
     <string name="bottom_sheet_expenses">Expenses:</string>
     <string name="bottom_sheet_result">Result:</string>
+    <string name="save">Save</string>
 </resources>
