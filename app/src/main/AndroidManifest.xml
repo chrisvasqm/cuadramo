@@ -21,9 +21,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".CatalogActivity"
-            android:label="Cuadres"
+            android:name=".catalog.CatalogActivity"
+            android:label="@string/catalog"
             android:parentActivityName=".signin.SignInActivity" />
+        <activity
+            android:name=".editor.EditorActivity"
+            android:label="@string/editor"
+            android:parentActivityName=".catalog.CatalogActivity"></activity>
     </application>
 
 </manifest>
