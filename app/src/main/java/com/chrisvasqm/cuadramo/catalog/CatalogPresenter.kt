@@ -21,6 +21,7 @@ class CatalogPresenter : CatalogContract.Presenter {
     }
 
     override fun loadCatalog() {
+        // TODO: Pending for refactor to use a repository to DRY out the userId and querying logic.
         val database = FirebaseDatabase.getInstance()
         val auth = FirebaseAuth.getInstance()
         val userId = auth.currentUser?.uid
