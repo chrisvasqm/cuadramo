@@ -42,7 +42,7 @@ class CatalogActivity : AppCompatActivity(), CatalogContract.View {
         router = CatalogRouter(this)
 
         firebaseDatabase = FirebaseDatabase.getInstance()
-        databaseReference = firebaseDatabase.getReference()
+        databaseReference = firebaseDatabase.reference
 
         auth = FirebaseAuth.getInstance()
 
