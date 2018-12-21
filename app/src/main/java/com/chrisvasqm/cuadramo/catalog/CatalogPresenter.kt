@@ -9,7 +9,6 @@ import com.google.firebase.database.ValueEventListener
 import timber.log.Timber
 
 class CatalogPresenter : CatalogContract.Presenter {
-
     private var view: CatalogContract.View? = null
 
     override fun attach(view: CatalogContract.View) {
@@ -46,6 +45,10 @@ class CatalogPresenter : CatalogContract.Presenter {
 
     override fun signOut() {
         view?.showSignOutDialog()
+    }
+
+    override fun rate() {
+        view?.rate()
     }
 
 }
