@@ -20,7 +20,6 @@ import kotlinx.android.synthetic.main.activity_catalog.*
 import kotlinx.android.synthetic.main.toolbar.*
 
 class CatalogActivity : AppCompatActivity(), CatalogContract.View {
-
     private lateinit var auth: FirebaseAuth
 
     private lateinit var client: GoogleSignInClient
@@ -71,6 +70,7 @@ class CatalogActivity : AppCompatActivity(), CatalogContract.View {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             R.id.item_sign_out -> presenter.signOut()
+            R.id.item_rate -> presenter.rate()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -104,4 +104,9 @@ class CatalogActivity : AppCompatActivity(), CatalogContract.View {
         }
         setNegativeButton(android.R.string.cancel) { _: DialogInterface, _: Int -> }
     }
+
+    override fun rate() {
+        router.goToPlayStore()
+    }
+
 }

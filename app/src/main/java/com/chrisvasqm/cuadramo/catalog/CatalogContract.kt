@@ -11,6 +11,8 @@ interface CatalogContract {
 
         fun showSignOutDialog()
 
+        fun rate()
+
     }
 
     interface Presenter : BasePresenter<View> {
@@ -19,11 +21,15 @@ interface CatalogContract {
 
         fun signOut()
 
+        fun rate()
+
     }
 
     interface Router {
 
         fun goToEditorScreen()
+
+        fun goToPlayStore()
 
     }
 
