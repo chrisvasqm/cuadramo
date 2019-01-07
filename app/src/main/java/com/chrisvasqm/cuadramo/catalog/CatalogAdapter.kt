@@ -27,7 +27,7 @@ class CatalogAdapter(private val cuadres: MutableList<Cuadre>, private val manag
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val cuadre = cuadres[position]
 
-        holder.catalogItemConstraintLayout.setOnClickListener { displayOptions() }
+        holder.catalogItemConstraintLayout.setOnClickListener { displayOptions(cuadre) }
         holder.textRevenue.text = cuadre.revenue.toString()
         holder.textExpenses.text = cuadre.expenses.toString()
         holder.textTickets.text = (cuadre.ticketsTotal - cuadre.ticketsLeft).toString()
@@ -41,8 +41,10 @@ class CatalogAdapter(private val cuadres: MutableList<Cuadre>, private val manag
         val textTickets = view.findViewById<TextView>(R.id.textTickets)
     }
 
-    private fun displayOptions() {
-        ItemOptionsBottomSheetDialogFragment().show(manager, TAG)
+    private fun displayOptions(cuadre: Cuadre) {
+        ItemOptionsBottomSheetDialogFragment()
+                .apply { setCuadre(cuadre) }
+                .show(manager, TAG)
     }
 
 }
