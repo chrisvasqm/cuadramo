@@ -43,7 +43,10 @@ class CatalogAdapter(private val cuadres: MutableList<Cuadre>, private val manag
 
     private fun displayOptions(cuadre: Cuadre) {
         ItemOptionsBottomSheetDialogFragment()
-                .apply { setCuadre(cuadre) }
+                .apply {
+                    setCuadre(cuadre)
+                    setManager(manager)
+                }
                 .show(manager, TAG)
     }
 
