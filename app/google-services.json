@@ -39,6 +39,14 @@
           }
         },
         {
+          "client_id": "372644659735-spkv4d2kdike2ls5ju04tpfsr0icp8vv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.chrisvasqm.cuadramo",
+            "certificate_hash": "6e0cdd7497db1f3e3be3a3f9611be41cb96e98ee"
+          }
+        },
+        {
           "client_id": "372644659735-gqp34qcpki9mjmpfp75aue359fkfef4g.apps.googleusercontent.com",
           "client_type": 3
         }

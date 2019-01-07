@@ -82,7 +82,7 @@ class CatalogActivity : AppCompatActivity(), CatalogContract.View {
     private fun setupRecyclerView(cuadres: MutableList<Cuadre>) {
         catalogRecyclerView.apply {
             setHasFixedSize(true)
-            adapter = CatalogAdapter(cuadres)
+            adapter = CatalogAdapter(cuadres, supportFragmentManager)
             layoutManager = LinearLayoutManager(this@CatalogActivity)
             addItemDecoration(DividerItemDecoration(this@CatalogActivity, DividerItemDecoration.VERTICAL))
         }

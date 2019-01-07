@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.FragmentManager
 import com.chrisvasqm.cuadramo.R
 import com.chrisvasqm.cuadramo.data.models.Cuadre
 import com.chrisvasqm.cuadramo.extensions.toString
@@ -16,6 +17,10 @@ import com.google.firebase.database.FirebaseDatabase
 class PreviewBottomSheetDialogFragment : BottomSheetDialogFragment() {
 
     private var cuadre = Cuadre()
+
+    private lateinit var manager: FragmentManager
+
+    var isPreview = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.bottom_dialog_cuadre_preview, container, false)
@@ -54,11 +59,20 @@ class PreviewBottomSheetDialogFragment : BottomSheetDialogFragment() {
             activity?.finish()
         }
 
+        // Hide the save button when the user is just checking an existing cuadre.
+        if (isPreview) {
+            btnSave?.visibility = View.GONE
+        }
+
         return view
     }
 
     fun setCuadre(cuadre: Cuadre) {
         this.cuadre = cuadre
+    }
+
+    fun setManager(manager: FragmentManager) {
+        this.manager = manager
     }
 
 }

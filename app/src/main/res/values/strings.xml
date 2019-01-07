@@ -25,4 +25,6 @@
     <string name="bottom_sheet_result">Result:</string>
     <string name="save">Save</string>
     <string name="rate">Rate</string>
+    <string name="delete">Delete</string>
+    <string name="preview">Preview</string>
 </resources>
