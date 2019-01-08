@@ -130,7 +130,7 @@ class EditorActivity : AppCompatActivity(), EditorContract.View {
 
     override fun displayUndoMessage() {
         Snackbar.make(editorCoordinatorLayout, getString(R.string.fields_cleared), Snackbar.LENGTH_LONG)
-                .setAction("Undo") { restoreForm() }
+                .setAction(getString(R.string.undo)) { restoreForm() }
                 .show()
     }
 

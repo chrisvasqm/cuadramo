@@ -12,8 +12,8 @@
     <string name="freebies">Freebies</string>
     <string name="delivery">Delivery</string>
     <string name="others">Others</string>
-    <string name="cuadrar">Cuadrar</string>
-    <string name="clear">Limpiar</string>
+    <string name="cuadrar">Calculate</string>
+    <string name="clear">Clear</string>
     <string name="fields_cleared">Fields cleared.</string>
 
     <!-- Button Sheet -->
@@ -27,4 +27,8 @@
     <string name="rate">Rate</string>
     <string name="delete">Delete</string>
     <string name="preview">Preview</string>
+    <string name="revenue">Revenue</string>
+    <string name="expenses">Expenses</string>
+    <string name="tickets">Tickets</string>
+    <string name="undo">Undo</string>
 </resources>
