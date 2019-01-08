@@ -78,7 +78,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:text="Revenue"
+            android:text="@string/revenue"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/textRevenue"
             app:layout_constraintStart_toStartOf="@+id/textRevenue"
@@ -90,7 +90,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:text="Expenses"
+            android:text="@string/expenses"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/textExpenses"
             app:layout_constraintStart_toStartOf="@+id/textExpenses"
@@ -102,11 +102,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:text="Tickets"
+            android:text="@string/tickets"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/textTickets"
             app:layout_constraintStart_toStartOf="@+id/textTickets"
             app:layout_constraintTop_toBottomOf="@+id/textTickets" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

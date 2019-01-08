@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Cuadramo</string>
+    <string name="welcome">Bienvenido</string>
+    <string name="sign_out">Cerrar sesión</string>
+    <string name="have_to_sign_in_again">Tendrás que iniciar sesión nuevamente</string>
+    <string name="catalog">Catálogo</string>
+    <string name="editor">Editor</string>
+    <string name="cash">Efectivo</string>
+    <string name="tickets_left">Tickets que sobraron</string>
+    <string name="tickets_total">Tickets en total</string>
+    <string name="food">Comida</string>
+    <string name="freebies">Exonerados</string>
+    <string name="delivery">Colmado</string>
+    <string name="others">Otros</string>
+    <string name="cuadrar">Cuadrar</string>
+    <string name="clear">Limpiar</string>
+    <string name="fields_cleared">Campos limpiados.</string>
+    <string name="bottom_sheet_header">Detalles</string>
+    <string name="bottom_sheet_date">Fecha:</string>
+    <string name="bottom_sheet_cash">Efectivo:</string>
+    <string name="bottom_sheet_documents">Legalizaciones:</string>
+    <string name="bottom_sheet_expenses">Gastos:</string>
+    <string name="bottom_sheet_result">Resultado:</string>
+    <string name="save">Guardar</string>
+    <string name="rate">Calificar</string>
+    <string name="delete">Borrar</string>
+    <string name="preview">Ver detalles</string>
+    <string name="revenue">Ingresos</string>
+    <string name="expenses">Gastos</string>
+    <string name="tickets">Legalizaciones</string>
+    <string name="undo">Deshacer</string>
+</resources>
