@@ -4,6 +4,7 @@ import android.content.DialogInterface
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -80,11 +81,13 @@ class CatalogActivity : AppCompatActivity(), CatalogContract.View {
     }
 
     private fun setupRecyclerView(cuadres: MutableList<Cuadre>) {
+        val animation = AnimationUtils.loadLayoutAnimation(this, R.anim.layout_animation_fall_down)
         catalogRecyclerView.apply {
             setHasFixedSize(true)
             adapter = CatalogAdapter(cuadres, supportFragmentManager)
             layoutManager = LinearLayoutManager(this@CatalogActivity)
             addItemDecoration(DividerItemDecoration(this@CatalogActivity, DividerItemDecoration.VERTICAL))
+            layoutAnimation = animation
         }
     }
 
