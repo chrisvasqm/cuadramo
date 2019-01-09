@@ -28,7 +28,7 @@
         android:tintMode="src_in"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:srcCompat="@drawable/ic_calendar_black_24dp" />
+        app:srcCompat="@drawable/ic_outline_calendar_24px" />
 
     <TextView
         android:id="@+id/labelDate"
