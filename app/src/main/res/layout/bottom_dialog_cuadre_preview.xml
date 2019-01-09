@@ -96,7 +96,7 @@
         android:tintMode="src_in"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgCash"
-        app:srcCompat="@drawable/ic_document_black_24dp" />
+        app:srcCompat="@drawable/ic_outline_description_24px" />
 
     <TextView
         android:id="@+id/labelDocuments"
