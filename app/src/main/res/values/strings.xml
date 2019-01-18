@@ -32,4 +32,5 @@
     <string name="tickets">Tickets</string>
     <string name="undo">Undo</string>
     <string name="sign_in_to_continue">Sign in to continue.</string>
+    <string name="about">About</string>
 </resources>

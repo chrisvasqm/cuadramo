@@ -2,6 +2,7 @@ package com.chrisvasqm.cuadramo.catalog
 
 import android.content.Intent
 import android.net.Uri
+import com.chrisvasqm.cuadramo.about.AboutActivity
 import com.chrisvasqm.cuadramo.editor.EditorActivity
 
 class CatalogRouter(private val activity: CatalogActivity) : CatalogContract.Router {
@@ -15,6 +16,10 @@ class CatalogRouter(private val activity: CatalogActivity) : CatalogContract.Rou
         Intent(Intent.ACTION_VIEW)
                 .apply { data = Uri.parse(url) }
                 .also { activity.startActivity(it) }
+    }
+
+    override fun goToAboutScreen() {
+        Intent(activity, AboutActivity::class.java).also { activity.startActivity(it) }
     }
 
 }

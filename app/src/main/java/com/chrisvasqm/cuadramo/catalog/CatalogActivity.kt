@@ -71,7 +71,8 @@ class CatalogActivity : AppCompatActivity(), CatalogContract.View {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             R.id.item_sign_out -> presenter.signOut()
-            R.id.item_rate -> presenter.rate()
+            R.id.item_rate -> presenter.goToPlayStore()
+            R.id.item_about -> presenter.goToAboutScreen()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -110,6 +111,10 @@ class CatalogActivity : AppCompatActivity(), CatalogContract.View {
 
     override fun rate() {
         router.goToPlayStore()
+    }
+
+    override fun goToAboutScreen() {
+        router.goToAboutScreen()
     }
 
 }

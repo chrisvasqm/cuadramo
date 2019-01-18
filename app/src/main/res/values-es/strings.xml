@@ -31,4 +31,5 @@
     <string name="tickets">Legalizaciones</string>
     <string name="undo">Deshacer</string>
     <string name="sign_in_to_continue">Inicia sesión para continuar.</string>
+    <string name="about">Acerca</string>
 </resources>
