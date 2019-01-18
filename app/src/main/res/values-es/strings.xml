@@ -30,4 +30,5 @@
     <string name="expenses">Gastos</string>
     <string name="tickets">Legalizaciones</string>
     <string name="undo">Deshacer</string>
+    <string name="sign_in_to_continue">Inicia sesión para continuar.</string>
 </resources>
