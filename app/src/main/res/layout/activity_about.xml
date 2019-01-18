@@ -45,7 +45,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="8dp"
-                    android:text="App"
+                    android:text="@string/app"
                     android:textSize="16dp" />
 
                 <LinearLayout
@@ -73,6 +73,36 @@
                         android:text="@string/preview" />
 
                 </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearGitHubLink"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/preview"
+                        android:tint="@color/darkGreyBold"
+                        android:tintMode="src_in"
+                        app:srcCompat="@drawable/ic_github" />
+
+                    <TextView
+                        android:id="@+id/textGithubLink"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginLeft="32dp"
+                        android:text="@string/fork_on_github" />
+
+                </LinearLayout>
+
 
             </LinearLayout>
 

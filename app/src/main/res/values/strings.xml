@@ -33,4 +33,6 @@
     <string name="undo">Undo</string>
     <string name="sign_in_to_continue">Sign in to continue.</string>
     <string name="about">About</string>
+    <string name="app">App</string>
+    <string name="fork_on_github">Fork it on GitHub</string>
 </resources>

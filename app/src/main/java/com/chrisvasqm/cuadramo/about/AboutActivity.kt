@@ -6,7 +6,9 @@ import com.chrisvasqm.cuadramo.R
 import kotlinx.android.synthetic.main.activity_about.*
 import kotlinx.android.synthetic.main.toolbar.*
 
-class AboutActivity : AppCompatActivity() {
+class AboutActivity : AppCompatActivity(), AboutContract.View {
+
+    private lateinit var router: AboutContract.Router
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -15,6 +17,13 @@ class AboutActivity : AppCompatActivity() {
         displayVersionNumber()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        router = AboutRouter(this)
+
+        linearGitHubLink.setOnClickListener { goToGitHub() }
+    }
+
+    override fun goToGitHub() {
+        router.goToGitHub()
     }
 
     private fun displayVersionNumber() {
