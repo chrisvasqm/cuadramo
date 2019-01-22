@@ -21,6 +21,7 @@ import kotlinx.android.synthetic.main.activity_catalog.*
 import kotlinx.android.synthetic.main.toolbar.*
 
 class CatalogActivity : AppCompatActivity(), CatalogContract.View {
+
     private lateinit var auth: FirebaseAuth
 
     private lateinit var client: GoogleSignInClient
@@ -103,7 +104,7 @@ class CatalogActivity : AppCompatActivity(), CatalogContract.View {
         setPositiveButton(R.string.sign_out) { _: DialogInterface, _: Int ->
             client.signOut().addOnCompleteListener {
                 auth.signOut()
-                finish()
+                goToSignInScreen()
             }
         }
         setNegativeButton(android.R.string.cancel) { _: DialogInterface, _: Int -> }
@@ -116,5 +117,10 @@ class CatalogActivity : AppCompatActivity(), CatalogContract.View {
     override fun goToAboutScreen() {
         router.goToAboutScreen()
     }
+
+    override fun goToSignInScreen() {
+        router.goToSignInScreen()
+    }
+
 
 }
