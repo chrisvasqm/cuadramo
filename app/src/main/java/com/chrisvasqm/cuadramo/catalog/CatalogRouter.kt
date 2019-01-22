@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import com.chrisvasqm.cuadramo.about.AboutActivity
 import com.chrisvasqm.cuadramo.editor.EditorActivity
+import com.chrisvasqm.cuadramo.signin.SignInActivity
 
 class CatalogRouter(private val activity: CatalogActivity) : CatalogContract.Router {
 
@@ -20,6 +21,12 @@ class CatalogRouter(private val activity: CatalogActivity) : CatalogContract.Rou
 
     override fun goToAboutScreen() {
         Intent(activity, AboutActivity::class.java).also { activity.startActivity(it) }
+    }
+
+    override fun goToSignInScreen() {
+        Intent(activity, SignInActivity::class.java)
+                .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                .also { activity.startActivity(it) }
     }
 
 }
