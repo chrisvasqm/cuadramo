@@ -13,6 +13,8 @@ interface CatalogContract {
 
         fun rate()
 
+        fun goToAboutScreen()
+
     }
 
     interface Presenter : BasePresenter<View> {
@@ -21,7 +23,9 @@ interface CatalogContract {
 
         fun signOut()
 
-        fun rate()
+        fun goToPlayStore()
+
+        fun goToAboutScreen()
 
     }
 
@@ -30,6 +34,8 @@ interface CatalogContract {
         fun goToEditorScreen()
 
         fun goToPlayStore()
+
+        fun goToAboutScreen()
 
     }
 

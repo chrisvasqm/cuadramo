@@ -47,8 +47,12 @@ class CatalogPresenter : CatalogContract.Presenter {
         view?.showSignOutDialog()
     }
 
-    override fun rate() {
+    override fun goToPlayStore() {
         view?.rate()
+    }
+
+    override fun goToAboutScreen() {
+        view?.goToAboutScreen()
     }
 
 }

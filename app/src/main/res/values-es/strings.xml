@@ -31,4 +31,8 @@
     <string name="tickets">Legalizaciones</string>
     <string name="undo">Deshacer</string>
     <string name="sign_in_to_continue">Inicia sesión para continuar.</string>
+    <string name="about">Acerca</string>
+    <string name="app">Aplicación</string>
+    <string name="fork_on_github">Tenlo en Github</string>
+    <string name="made_by">Hecho por</string>
 </resources>
