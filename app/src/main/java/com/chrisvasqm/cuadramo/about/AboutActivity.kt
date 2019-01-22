@@ -20,10 +20,22 @@ class AboutActivity : AppCompatActivity(), AboutContract.View {
         router = AboutRouter(this)
 
         linearGitHubLink.setOnClickListener { goToGitHub() }
+
+        linearChristianLink.setOnClickListener { goToChristianLink() }
+
+        linearCarlaLink.setOnClickListener { goToCristalLink() }
     }
 
     override fun goToGitHub() {
         router.goToGitHub()
+    }
+
+    override fun goToChristianLink() {
+        router.goToChristianLink()
+    }
+
+    override fun goToCristalLink() {
+        router.goToCristalLink()
     }
 
     private fun displayVersionNumber() {

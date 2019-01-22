@@ -34,4 +34,5 @@
     <string name="about">Acerca</string>
     <string name="app">Aplicación</string>
     <string name="fork_on_github">Tenlo en Github</string>
+    <string name="made_by">Hecho por</string>
 </resources>

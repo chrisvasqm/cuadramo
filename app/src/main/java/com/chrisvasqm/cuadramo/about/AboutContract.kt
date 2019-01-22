@@ -6,11 +6,19 @@ interface AboutContract {
 
         fun goToGitHub()
 
+        fun goToChristianLink()
+
+        fun goToCristalLink()
+
     }
 
     interface Router {
 
         fun goToGitHub()
+
+        fun goToChristianLink()
+
+        fun goToCristalLink()
 
     }
 
