@@ -44,6 +44,8 @@ class PreviewBottomSheetDialogFragment : BottomSheetDialogFragment() {
         btnSave?.setOnClickListener {
             val database = FirebaseDatabase.getInstance()
             val reference = database.reference
+            val key = reference.child("games").push().key
+            key?.let { k -> cuadre.id = k }
             val auth = FirebaseAuth.getInstance()
             val userId = auth.currentUser?.uid
             if (userId != null) {

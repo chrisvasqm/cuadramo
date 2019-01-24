@@ -1,16 +1,22 @@
 package com.chrisvasqm.cuadramo.ui
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.FragmentManager
 import com.chrisvasqm.cuadramo.R
 import com.chrisvasqm.cuadramo.data.models.Cuadre
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import timber.log.Timber
 
 class ItemOptionsBottomSheetDialogFragment : BottomSheetDialogFragment() {
 
@@ -27,7 +33,7 @@ class ItemOptionsBottomSheetDialogFragment : BottomSheetDialogFragment() {
         optionPreview.setOnClickListener { previewItem() }
 
         val optionDelete = view.findViewById<LinearLayout>(R.id.optionDelete)
-        optionDelete.setOnClickListener { deleteItem() }
+        optionDelete.setOnClickListener { showDeletionDialog() }
 
         return view
     }
@@ -60,8 +66,44 @@ class ItemOptionsBottomSheetDialogFragment : BottomSheetDialogFragment() {
             val database = FirebaseDatabase.getInstance()
             val reference = database.getReference("users/$userId/cuadres")
 
-            // TODO: Delete the Cuadre selected
+            reference
+                    .orderByChild("id")
+                    .equalTo(cuadre.id)
+                    .addValueEventListener(object : ValueEventListener {
+
+                        override fun onDataChange(snapshot: DataSnapshot) {
+                            for (child in snapshot.children) {
+                                val currentCuadre = child.getValue(Cuadre::class.java)
+                                if (currentCuadre?.id == cuadre.id) {
+                                    child.ref.removeValue()
+
+                                    // To close the bottom sheet after removing an item.
+                                    dismiss()
+                                    break
+                                }
+                            }
+                        }
+
+                        override fun onCancelled(error: DatabaseError) {
+                            Timber.e("Firebase Database Deletion Error - $error")
+                        }
+
+                    })
         }
+    }
+
+    private fun showDeletionDialog() {
+        val dialog = setupDeletionDialog()
+        dialog.show()
+    }
+
+    private fun setupDeletionDialog(): AlertDialog.Builder = AlertDialog.Builder(context!!).apply {
+        setTitle(R.string.delete)
+        setMessage(getString(R.string.not_recover))
+        setPositiveButton(R.string.delete) { _: DialogInterface, _: Int ->
+            deleteItem()
+        }
+        setNegativeButton(android.R.string.cancel) { _: DialogInterface, _: Int -> }
     }
 
 
