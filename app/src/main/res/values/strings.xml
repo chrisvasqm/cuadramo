@@ -36,6 +36,7 @@
     <string name="app">App</string>
     <string name="fork_on_github">Fork it on GitHub</string>
     <string name="made_by">Made by</string>
-    <string name="cristal_diplan">Cristal Diplan</string>
-    <string name="christian_v_squez">Christian Vásquez</string>
+    <string name="cristal_diplan" translatable="false">Cristal Diplan</string>
+    <string name="christian_v_squez" translatable="false">Christian Vásquez</string>
+    <string name="not_recover">You will not be able to recover this cuadre.</string>
 </resources>
