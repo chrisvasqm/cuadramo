@@ -74,6 +74,7 @@ class ItemOptionsBottomSheetDialogFragment : BottomSheetDialogFragment() {
                                 val currentCuadre = child.getValue(Cuadre::class.java)
                                 if (currentCuadre?.id == cuadre.id) {
                                     child.ref.removeValue()
+                                    dismiss()
                                     break
                                 }
                             }
