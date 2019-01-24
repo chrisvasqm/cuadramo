@@ -6,6 +6,7 @@ import java.util.*
 private const val TICKET_COST = 50
 
 data class Cuadre(
+        var id: String = "",
         var cash: Int = 0,
         var ticketsTotal: Int = 0,
         var ticketsLeft: Int = 0,

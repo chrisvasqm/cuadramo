@@ -10,7 +10,11 @@ import com.chrisvasqm.cuadramo.R
 import com.chrisvasqm.cuadramo.data.models.Cuadre
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import timber.log.Timber
 
 class ItemOptionsBottomSheetDialogFragment : BottomSheetDialogFragment() {
 
@@ -60,7 +64,26 @@ class ItemOptionsBottomSheetDialogFragment : BottomSheetDialogFragment() {
             val database = FirebaseDatabase.getInstance()
             val reference = database.getReference("users/$userId/cuadres")
 
-            // TODO: Delete the Cuadre selected
+            reference
+                    .orderByChild("id")
+                    .equalTo(cuadre.id)
+                    .addValueEventListener(object : ValueEventListener {
+
+                        override fun onDataChange(snapshot: DataSnapshot) {
+                            for (child in snapshot.children) {
+                                val currentCuadre = child.getValue(Cuadre::class.java)
+                                if (currentCuadre?.id == cuadre.id) {
+                                    child.ref.removeValue()
+                                    break
+                                }
+                            }
+                        }
+
+                        override fun onCancelled(error: DatabaseError) {
+                            Timber.e("Firebase Database Deletion Error - $error")
+                        }
+
+                    })
         }
     }
 

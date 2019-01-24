@@ -89,6 +89,7 @@ class EditorActivity : AppCompatActivity(), EditorContract.View {
 
     override fun getCuadre(): Cuadre {
         return Cuadre(
+                "",
                 inputCash.text.toInt(),
                 inputTicketsTotal.text.toInt(),
                 inputTicketsLeft.text.toInt(),
