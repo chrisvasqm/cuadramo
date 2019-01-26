@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.FragmentManager
 import com.chrisvasqm.cuadramo.R
@@ -67,8 +68,6 @@ class ItemOptionsBottomSheetDialogFragment : BottomSheetDialogFragment() {
             val reference = database.getReference("users/$userId/cuadres")
 
             reference
-                    .orderByChild("id")
-                    .equalTo(cuadre.id)
                     .addValueEventListener(object : ValueEventListener {
 
                         override fun onDataChange(snapshot: DataSnapshot) {
@@ -86,6 +85,7 @@ class ItemOptionsBottomSheetDialogFragment : BottomSheetDialogFragment() {
 
                         override fun onCancelled(error: DatabaseError) {
                             Timber.e("Firebase Database Deletion Error - $error")
+                            Toast.makeText(context!!, "Something went wrong. Try again later.", Toast.LENGTH_SHORT).show()
                         }
 
                     })
