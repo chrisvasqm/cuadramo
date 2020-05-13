@@ -2,7 +2,6 @@ package com.chrisvasqm.cuadramo.signin
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.chrisvasqm.cuadramo.R
 import com.chrisvasqm.cuadramo.catalog.CatalogActivity
@@ -13,6 +12,7 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_sign_in.*
+import timber.log.Timber
 
 class SignInActivity : AppCompatActivity(), SignInContract.View {
 
@@ -70,15 +70,15 @@ class SignInActivity : AppCompatActivity(), SignInContract.View {
     }
 
     override fun logAccountId(id: String?) {
-        Log.d(TAG, "authWithGoogle: $id")
+        Timber.d(TAG, "authWithGoogle: $id")
     }
 
     override fun logLoginSuccessfully() {
-        Log.d(TAG, "signInWithCredential: success")
+        Timber.d(TAG, "signInWithCredential: success")
     }
 
     override fun logLoginFailure(exception: Exception?) {
-        Log.w(TAG, "signInWithCredential:failure", exception)
+        Timber.w(exception, "signInWithCredential:failure")
     }
 
     override fun showMessage(message: String) {
@@ -95,7 +95,7 @@ class SignInActivity : AppCompatActivity(), SignInContract.View {
                 val account = task?.getResult(ApiException::class.java)
                 presenter.authWithGoogle(account)
             } catch (exception: ApiException) {
-                Log.w(TAG, "Google Sign In failed: $exception")
+                Timber.w(TAG, "Google Sign In failed: $exception")
                 Snackbar.make(signInLayout, "Google sign in failed.", Snackbar.LENGTH_LONG).show()
             }
         }
