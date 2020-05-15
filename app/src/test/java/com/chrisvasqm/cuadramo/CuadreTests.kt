@@ -8,30 +8,32 @@ import org.junit.Test
 class CuadreTests {
 
     @Test
-    fun revenue_WithAllValues_ReturnsThreeHundred() {
+    fun revenue_WithAllValues_ReturnsThreeThousandSevenHundred() {
         val cuadre = Cuadre(
-                300,
-                10,
-                2,
+                "",
                 100,
-                2,
+                100,
+                20,
                 150,
-                50
+                2,
+                50,
+                100
         )
 
-        assert(cuadre.revenue).isEqualTo(300)
+        assert(cuadre.revenue).isEqualTo(3700)
     }
 
     @Test
     fun expenses_WithAllValues_ReturnsFourHundred() {
         val cuadre = Cuadre(
-                300,
-                10,
-                2,
+                "",
                 100,
-                2,
+                100,
+                20,
                 150,
-                50
+                2,
+                50,
+                100
         )
 
         assert(cuadre.expenses).isEqualTo(400)
