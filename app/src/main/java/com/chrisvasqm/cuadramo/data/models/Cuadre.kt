@@ -19,9 +19,12 @@ data class Cuadre(
     val createdAt: Date = getCurrentDateTime()
 
     val revenue: Int
-        get() = (cash + (ticketsTotal - ticketsLeft) * TICKET_COST) - expenses
+        get() = (cash + ticketsSold * TICKET_COST) - expenses
 
     val expenses: Int
         get() = food + delivery + extras + (freebies * TICKET_COST)
+
+    val ticketsSold: Int
+        get() = ticketsTotal - ticketsLeft
 
 }
