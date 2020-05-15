@@ -30,7 +30,7 @@ class CatalogAdapter(private val cuadres: MutableList<Cuadre>, private val manag
         holder.catalogItemConstraintLayout.setOnClickListener { displayOptions(cuadre) }
         holder.textRevenue.text = cuadre.revenue.toString()
         holder.textExpenses.text = cuadre.expenses.toString()
-        holder.textTickets.text = (cuadre.ticketsTotal - cuadre.ticketsLeft).toString()
+        holder.textTickets.text = cuadre.ticketsSold.toString()
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {

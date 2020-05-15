@@ -38,4 +38,14 @@ class CuadreTests {
 
         assert(cuadre.expenses).isEqualTo(400)
     }
+
+    @Test
+    fun ticketsSold_WithTwentyOutOfAHundred_ReturnsEighty() {
+        val cuadre = Cuadre(
+                ticketsTotal = 100,
+                ticketsLeft = 20
+        )
+
+        assert(cuadre.ticketsSold).isEqualTo(80)
+    }
 }
