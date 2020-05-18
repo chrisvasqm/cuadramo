@@ -1,6 +1,7 @@
 package com.chrisvasqm.cuadramo.ui
 
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.FragmentManager
 import com.chrisvasqm.cuadramo.R
 import com.chrisvasqm.cuadramo.data.models.Cuadre
+import com.chrisvasqm.cuadramo.editor.EditorActivity
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -33,10 +35,19 @@ class ItemOptionsBottomSheetDialogFragment : BottomSheetDialogFragment() {
         val optionPreview = view.findViewById<LinearLayout>(R.id.optionPreview)
         optionPreview.setOnClickListener { previewItem() }
 
+        val optionEdit = view.findViewById<LinearLayout>(R.id.optionEdit)
+        optionEdit.setOnClickListener { goToEditorScreen(cuadre) }
+
         val optionDelete = view.findViewById<LinearLayout>(R.id.optionDelete)
         optionDelete.setOnClickListener { showDeletionDialog() }
 
         return view
+    }
+
+    private fun goToEditorScreen(cuadre: Cuadre) {
+        Intent(activity, EditorActivity::class.java)
+                .apply { putExtra("cuadre", cuadre) }
+                .also { this.startActivity(it) }
     }
 
     fun setCuadre(cuadre: Cuadre) {
