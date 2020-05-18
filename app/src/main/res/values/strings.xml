@@ -39,4 +39,5 @@
     <string name="cristal_diplan" translatable="false">Cristal Diplan</string>
     <string name="christian_v_squez" translatable="false">Christian Vásquez</string>
     <string name="not_recover">You will not be able to recover this cuadre.</string>
+    <string name="edit">Edit</string>
 </resources>
