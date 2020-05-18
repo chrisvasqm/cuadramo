@@ -48,6 +48,9 @@ class ItemOptionsBottomSheetDialogFragment : BottomSheetDialogFragment() {
         Intent(activity, EditorActivity::class.java)
                 .apply { putExtra("cuadre", cuadre) }
                 .also { this.startActivity(it) }
+
+        // So that the ItemOptionsBottomSheet hides before the next one opens.
+        dismiss()
     }
 
     fun setCuadre(cuadre: Cuadre) {
