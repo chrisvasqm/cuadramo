@@ -20,13 +20,16 @@ import kotlinx.android.synthetic.main.activity_editor.*
 import kotlinx.android.synthetic.main.toolbar.*
 
 class EditorActivity : AppCompatActivity(), EditorContract.View {
+
     private val TAG = "EditorActivity"
 
     private lateinit var presenter: EditorContract.Presenter
 
     private lateinit var router: EditorContract.Router
 
-    private var undoCuadre = Cuadre()
+    private lateinit var undoCuadre: Cuadre
+
+    private lateinit var editingCuadre: Cuadre
 
     private val clearWatcher = object : TextWatcher {
         override fun afterTextChanged(s: Editable?) {}
@@ -58,6 +61,11 @@ class EditorActivity : AppCompatActivity(), EditorContract.View {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         presenter = EditorPresenter().apply { attach(this@EditorActivity) }
         router = EditorRouter(this)
+
+        if (intent.getParcelableExtra<Cuadre>("cuadre") != null) {
+            editingCuadre = intent.getParcelableExtra("cuadre") as Cuadre
+            fillForm(editingCuadre)
+        }
 
         btnClear.setOnClickListener { presenter.clearForm() }
 
@@ -131,18 +139,18 @@ class EditorActivity : AppCompatActivity(), EditorContract.View {
 
     override fun displayUndoMessage() {
         Snackbar.make(editorCoordinatorLayout, getString(R.string.fields_cleared), Snackbar.LENGTH_LONG)
-                .setAction(getString(R.string.undo)) { restoreForm() }
+                .setAction(getString(R.string.undo)) { fillForm(undoCuadre) }
                 .show()
     }
 
-    override fun restoreForm() {
-        inputCash.setText(undoCuadre.cash.toString())
-        inputTicketsTotal.setText(undoCuadre.ticketsTotal.toString())
-        inputTicketsLeft.setText(undoCuadre.ticketsLeft.toString())
-        inputFood.setText(undoCuadre.food.toString())
-        inputFreebies.setText(undoCuadre.freebies.toString())
-        inputDelivery.setText(undoCuadre.delivery.toString())
-        inputOthers.setText(undoCuadre.extras.toString())
+    override fun fillForm(cuadre: Cuadre) {
+        inputCash.setText(cuadre.cash.toString())
+        inputTicketsTotal.setText(cuadre.ticketsTotal.toString())
+        inputTicketsLeft.setText(cuadre.ticketsLeft.toString())
+        inputFood.setText(cuadre.food.toString())
+        inputFreebies.setText(cuadre.freebies.toString())
+        inputDelivery.setText(cuadre.delivery.toString())
+        inputOthers.setText(cuadre.extras.toString())
     }
 
 }

@@ -15,7 +15,7 @@ interface EditorContract {
 
         fun saveTemporaryCuadre()
 
-        fun restoreForm()
+        fun fillForm(cuadre: Cuadre)
 
         fun showPreview()
 
