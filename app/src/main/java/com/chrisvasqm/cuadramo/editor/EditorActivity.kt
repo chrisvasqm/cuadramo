@@ -58,6 +58,8 @@ class EditorActivity : AppCompatActivity(), EditorContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_editor)
         setSupportActionBar(toolbar)
+        setupClearButtonWatcher()
+        setupCuadrarButtonWatcher()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         presenter = EditorPresenter().apply { attach(this@EditorActivity) }
         router = EditorRouter(this)
@@ -70,9 +72,6 @@ class EditorActivity : AppCompatActivity(), EditorContract.View {
         btnClear.setOnClickListener { presenter.clearForm() }
 
         btnCuadrar.setOnClickListener { presenter.showPreview() }
-
-        setupClearButtonWatcher()
-        setupCuadrarButtonWatcher()
     }
 
     override fun onDestroy() {
