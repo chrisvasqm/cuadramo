@@ -1,10 +1,13 @@
 package com.chrisvasqm.cuadramo.data.models
 
+import android.os.Parcelable
 import com.chrisvasqm.cuadramo.extensions.getCurrentDateTime
+import kotlinx.android.parcel.Parcelize
 import java.util.*
 
 private const val TICKET_COST = 50
 
+@Parcelize
 data class Cuadre(
         var id: String = "",
         var cash: Int = 0,
@@ -14,7 +17,7 @@ data class Cuadre(
         var freebies: Int = 0,
         var delivery: Int = 0,
         var extras: Int = 0
-) {
+) : Parcelable {
 
     val createdAt: Date = getCurrentDateTime()
 
