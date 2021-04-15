@@ -2,6 +2,8 @@ package com.chrisvasqm.cuadramo.data.models
 
 import android.os.Parcelable
 import com.chrisvasqm.cuadramo.extensions.getCurrentDateTime
+import com.google.firebase.encoders.annotations.Encodable
+import kotlinx.android.parcel.IgnoredOnParcel
 import kotlinx.android.parcel.Parcelize
 import java.util.*
 
@@ -19,6 +21,7 @@ data class Cuadre(
         var extras: Int = 0
 ) : Parcelable {
 
+    @IgnoredOnParcel
     val createdAt: Date = getCurrentDateTime()
 
     val revenue: Int

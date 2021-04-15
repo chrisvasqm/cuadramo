@@ -65,7 +65,7 @@ class EditorActivity : AppCompatActivity(), EditorContract.View {
         router = EditorRouter(this)
 
         if (intent.getParcelableExtra<Cuadre>("cuadre") != null) {
-            editingCuadre = intent.getParcelableExtra("cuadre") as Cuadre
+            editingCuadre = intent.getParcelableExtra("cuadre")!!
             fillForm(editingCuadre)
         }
 
