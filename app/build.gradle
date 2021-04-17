@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.google.firebase.crashlytics'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 30
@@ -44,18 +45,16 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.recyclerview:recyclerview:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.0-beta01'
-    implementation 'com.google.android.material:material:1.4.0-alpha02'
+    implementation 'com.google.android.material:material:1.4.0-alph a02'
     implementation 'com.google.android.material:material:1.4.0-alpha02'
 
     // Firebase
-    implementation 'com.google.firebase:firebase-core:18.0.3'
-    implementation 'com.google.firebase:firebase-auth:20.0.4'
-    implementation 'com.google.firebase:firebase-database:19.7.0'
+    implementation platform('com.google.firebase:firebase-bom:27.0.0')
+    implementation 'com.google.firebase:firebase-core'
+    implementation 'com.google.firebase:firebase-auth'
+    implementation 'com.google.firebase:firebase-database'
 
     // Crashlytics
-    // Import the BoM for the Firebase platform
-    implementation platform('com.google.firebase:firebase-bom:27.0.0')
-
     // Declare the dependencies for the Crashlytics and Analytics libraries
     // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation 'com.google.firebase:firebase-crashlytics-ktx'

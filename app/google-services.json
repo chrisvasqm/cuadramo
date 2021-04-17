@@ -15,30 +15,6 @@
       },
       "oauth_client": [
         {
-          "client_id": "372644659735-vs5te0m296fk217hj3uis6dv8v6qngph.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.chrisvasqm.cuadramo",
-            "certificate_hash": "b849eccaf099a01a09a7795496a19abf8fcdea7b"
-          }
-        },
-        {
-          "client_id": "372644659735-spkv4d2kdike2ls5ju04tpfsr0icp8vv.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.chrisvasqm.cuadramo",
-            "certificate_hash": "6e0cdd7497db1f3e3be3a3f9611be41cb96e98ee"
-          }
-        },
-        {
-          "client_id": "372644659735-gl6rjh2ng37cjp5r9gclkvukj3ofa1nt.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.chrisvasqm.cuadramo",
-            "certificate_hash": "a403d870022cb4722a78f2be85126b7e337adbeb"
-          }
-        },
-        {
           "client_id": "372644659735-4nvdlkof9lje7olcl2a6dtauf4gtila6.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -52,6 +28,30 @@
           "android_info": {
             "package_name": "com.chrisvasqm.cuadramo",
             "certificate_hash": "d891b2386720d19c48b6f54c8bf4116625c988f5"
+          }
+        },
+        {
+          "client_id": "372644659735-gl6rjh2ng37cjp5r9gclkvukj3ofa1nt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.chrisvasqm.cuadramo",
+            "certificate_hash": "a403d870022cb4722a78f2be85126b7e337adbeb"
+          }
+        },
+        {
+          "client_id": "372644659735-spkv4d2kdike2ls5ju04tpfsr0icp8vv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.chrisvasqm.cuadramo",
+            "certificate_hash": "6e0cdd7497db1f3e3be3a3f9611be41cb96e98ee"
+          }
+        },
+        {
+          "client_id": "372644659735-vs5te0m296fk217hj3uis6dv8v6qngph.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.chrisvasqm.cuadramo",
+            "certificate_hash": "b849eccaf099a01a09a7795496a19abf8fcdea7b"
           }
         },
         {
