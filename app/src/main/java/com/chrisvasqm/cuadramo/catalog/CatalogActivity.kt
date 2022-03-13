@@ -69,8 +69,8 @@ class CatalogActivity : AppCompatActivity(), CatalogContract.View {
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item?.itemId) {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
             R.id.item_sign_out -> presenter.signOut()
             R.id.item_rate -> presenter.goToPlayStore()
             R.id.item_about -> presenter.goToAboutScreen()
