@@ -62,7 +62,7 @@ dependencies {
 //    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
 
     // Google Play Services
-    implementation 'com.google.android.gms:play-services-auth:18.0.0'
+    implementation 'com.google.android.gms:play-services-auth:20.1.0'
 
     // Jake Wharton's
     implementation 'com.jakewharton.timber:timber:4.7.1'
