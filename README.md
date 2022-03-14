@@ -23,12 +23,6 @@ the earnings and expenses of each day, but Cuadramo made her life much simpler.
 
 ## Screenshots
 
-![Login screen](/screenshots/1.png)
-
-![Catalog screen](/screenshots/2.png)
-
-![Create Cuadre screen](/screenshots/3.png)
-
-![Preview Cuadre bottom sheet](/screenshots/4.png)
-
-![About screen](/screenshots/5.png)
+<img src="/screenshots/1.png" width="100"/> <img src="/screenshots/2.png" width="100"/> 
+<img src="/screenshots/3.png" width="100"/> <img src="/screenshots/4.png" width="100"/> 
+<img src="/screenshots/4.png" width="100" />
