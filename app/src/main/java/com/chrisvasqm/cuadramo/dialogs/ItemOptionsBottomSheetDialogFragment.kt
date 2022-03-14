@@ -1,4 +1,4 @@
-package com.chrisvasqm.cuadramo.ui
+package com.chrisvasqm.cuadramo.dialogs
 
 import android.content.DialogInterface
 import android.os.Bundle
