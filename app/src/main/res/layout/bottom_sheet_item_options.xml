@@ -36,6 +36,35 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/optionEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/imageEdit"
+            android:layout_width="24dp"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_baseline_edit_24"
+            android:contentDescription="@string/preview" />
+
+        <TextView
+            android:id="@+id/textEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:text="@string/edit" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
         android:id="@+id/optionDelete"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
