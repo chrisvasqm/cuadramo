@@ -9,7 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.FragmentManager
 import com.chrisvasqm.cuadramo.R
-import com.chrisvasqm.cuadramo.data.models.Cuadre
+import com.chrisvasqm.cuadramo.model.Cuadre
 import com.chrisvasqm.cuadramo.databinding.BottomSheetItemOptionsBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 

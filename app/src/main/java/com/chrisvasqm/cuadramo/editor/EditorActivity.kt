@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.chrisvasqm.cuadramo.R
-import com.chrisvasqm.cuadramo.data.models.Cuadre
+import com.chrisvasqm.cuadramo.model.Cuadre
 import com.chrisvasqm.cuadramo.databinding.ActivityEditorBinding
 import com.chrisvasqm.cuadramo.extensions.clear
 import com.chrisvasqm.cuadramo.extensions.toInt

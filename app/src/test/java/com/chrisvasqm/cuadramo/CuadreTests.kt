@@ -2,7 +2,7 @@ package com.chrisvasqm.cuadramo
 
 import assertk.assert
 import assertk.assertions.isEqualTo
-import com.chrisvasqm.cuadramo.data.models.Cuadre
+import com.chrisvasqm.cuadramo.model.Cuadre
 import org.junit.Test
 
 class CuadreTests {
