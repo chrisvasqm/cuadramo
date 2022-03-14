@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.animation.AnimationUtils
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -16,8 +17,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.toolbar.*
 
 class CatalogActivity : AppCompatActivity(), CatalogContract.View {
@@ -32,9 +31,6 @@ class CatalogActivity : AppCompatActivity(), CatalogContract.View {
 
     private lateinit var router: CatalogContract.Router
 
-    private lateinit var firebaseDatabase: FirebaseDatabase
-
-    private lateinit var databaseReference: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,9 +40,6 @@ class CatalogActivity : AppCompatActivity(), CatalogContract.View {
 
         presenter = CatalogPresenter().apply { attach(this@CatalogActivity) }
         presenter.loadCatalog()
-
-        firebaseDatabase = FirebaseDatabase.getInstance()
-        databaseReference = firebaseDatabase.reference
 
         auth = FirebaseAuth.getInstance()
 
@@ -83,6 +76,8 @@ class CatalogActivity : AppCompatActivity(), CatalogContract.View {
     }
 
     override fun showCatalog(cuadres: MutableList<Cuadre>) {
+        // TODO: Remove Toast after implementing Room database
+        Toast.makeText(this, "WIP: Removed Firebase Database", Toast.LENGTH_LONG).show()
         setupRecyclerView(cuadres)
     }
 
