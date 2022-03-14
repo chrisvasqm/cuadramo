@@ -17,18 +17,13 @@ import com.chrisvasqm.cuadramo.ui.PreviewBottomSheetDialogFragment
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
-import kotlinx.android.synthetic.main.activity_editor.*
 import kotlinx.android.synthetic.main.toolbar.*
 
-class EditorActivity : AppCompatActivity(), EditorContract.View {
+class EditorActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityEditorBinding
 
-    private val TAG = "EditorActivity"
-
-    private lateinit var presenter: EditorContract.Presenter
-
-    private lateinit var router: EditorContract.Router
+    private val TAG = this::class.java.simpleName
 
     private var undoCuadre = Cuadre()
 
@@ -36,13 +31,14 @@ class EditorActivity : AppCompatActivity(), EditorContract.View {
         override fun afterTextChanged(s: Editable?) {}
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
         override fun onTextChanged(text: CharSequence?, start: Int, before: Int, count: Int) {
-            val isAnyFieldFilled: Boolean = inputCash.text?.isNotBlank()!! ||
-                    inputTicketsTotal.text?.isNotBlank()!! ||
-                    inputTicketsLeft.text?.isNotBlank()!! ||
-                    inputFood.text?.isNotBlank()!! ||
-                    inputFreebies.text?.isNotBlank()!! ||
-                    inputDelivery.text?.isNotBlank()!! ||
-                    inputOthers.text?.isNotBlank()!!
+            val isAnyFieldFilled: Boolean = binding.inputCash.text?.isNotBlank()!! ||
+                    binding.inputTicketsTotal.text?.isNotBlank()!! ||
+                    binding.inputTicketsLeft.text?.isNotBlank()!! ||
+                    binding.inputFood.text?.isNotBlank()!! ||
+                    binding.inputFreebies.text?.isNotBlank()!! ||
+                    binding.inputDelivery.text?.isNotBlank()!! ||
+                    binding.inputOthers.text?.isNotBlank()!!
+
             binding.btnClear.isEnabled = isAnyFieldFilled
         }
     }
@@ -52,7 +48,7 @@ class EditorActivity : AppCompatActivity(), EditorContract.View {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
             binding.btnCuadrar.isEnabled =
-                inputTicketsTotal.text.toInt() > inputTicketsLeft.text.toInt()
+                binding.inputTicketsTotal.text.toInt() > binding.inputTicketsLeft.text.toInt()
         }
     }
 
@@ -63,20 +59,12 @@ class EditorActivity : AppCompatActivity(), EditorContract.View {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        presenter = EditorPresenter().apply { attach(this@EditorActivity) }
-        router = EditorRouter(this)
+        binding.btnClear.setOnClickListener { clearForm() }
 
-        binding.btnClear.setOnClickListener { presenter.clearForm() }
-
-        binding.btnCuadrar.setOnClickListener { presenter.showPreview() }
+        binding.btnCuadrar.setOnClickListener { showPreview() }
 
         setupClearButtonWatcher()
         setupCuadrarButtonWatcher()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        presenter.detach()
     }
 
     private fun setupClearButtonWatcher() {
@@ -94,23 +82,23 @@ class EditorActivity : AppCompatActivity(), EditorContract.View {
         binding.inputTicketsLeft.addTextChangedListener(cuadrarWatcher)
     }
 
-    override fun getCuadre(): Cuadre {
+    private fun getCuadre(): Cuadre {
         return Cuadre(
             "",
-            inputCash.text.toInt(),
-            inputTicketsTotal.text.toInt(),
-            inputTicketsLeft.text.toInt(),
-            inputFood.text.toInt(),
-            inputFreebies.text.toInt(),
-            inputDelivery.text.toInt(),
-            inputOthers.text.toInt()
+            binding.inputCash.text.toInt(),
+            binding.inputTicketsTotal.text.toInt(),
+            binding.inputTicketsLeft.text.toInt(),
+            binding.inputFood.text.toInt(),
+            binding.inputFreebies.text.toInt(),
+            binding.inputDelivery.text.toInt(),
+            binding.inputOthers.text.toInt()
         )
     }
 
-    override fun clearForm() {
+    private fun clearForm() {
         saveTemporaryCuadre()
 
-        val form = editorForm as ViewGroup
+        val form = binding.editorForm as ViewGroup
         var counter = 0
         while (counter < form.childCount) {
             val view = form.getChildAt(counter)
@@ -126,19 +114,19 @@ class EditorActivity : AppCompatActivity(), EditorContract.View {
         }
     }
 
-    override fun showPreview() {
+    private fun showPreview() {
         PreviewBottomSheetDialogFragment()
             .apply { setCuadre(getCuadre()) }
             .show(supportFragmentManager, TAG)
     }
 
-    override fun saveTemporaryCuadre() {
+    private fun saveTemporaryCuadre() {
         undoCuadre = getCuadre()
     }
 
-    override fun displayUndoMessage() {
+    private fun displayUndoMessage() {
         Snackbar.make(
-            editorCoordinatorLayout,
+            binding.editorCoordinatorLayout,
             getString(R.string.fields_cleared),
             Snackbar.LENGTH_LONG
         )
@@ -146,7 +134,7 @@ class EditorActivity : AppCompatActivity(), EditorContract.View {
             .show()
     }
 
-    override fun restoreForm() {
+    private fun restoreForm() {
         binding.inputCash.setText(undoCuadre.cash.toString())
         binding.inputTicketsTotal.setText(undoCuadre.ticketsTotal.toString())
         binding.inputTicketsLeft.setText(undoCuadre.ticketsLeft.toString())
