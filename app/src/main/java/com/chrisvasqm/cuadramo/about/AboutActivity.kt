@@ -5,8 +5,9 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import com.chrisvasqm.cuadramo.R
 import com.chrisvasqm.cuadramo.databinding.ActivityAboutBinding
-import kotlinx.android.synthetic.main.toolbar.*
 
 class AboutActivity : AppCompatActivity() {
 
@@ -16,6 +17,8 @@ class AboutActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityAboutBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 

@@ -1,8 +1,6 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
-apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 32
@@ -33,6 +31,9 @@ android {
     }
     buildFeatures {
         viewBinding true
+    }
+    defaultConfig {
+        multiDexEnabled true
     }
 }
 
@@ -65,6 +66,8 @@ dependencies {
     // Jake Wharton's
     implementation 'com.jakewharton.timber:timber:5.0.1'
     implementation 'androidx.cardview:cardview:1.0.0'
-}
 
-apply plugin: 'com.google.gms.google-services'
+    // MultiDex
+    implementation 'com.android.support:multidex:2.0.1'
+
+}

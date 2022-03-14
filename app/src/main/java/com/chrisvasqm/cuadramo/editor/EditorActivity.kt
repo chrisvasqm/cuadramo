@@ -3,21 +3,19 @@ package com.chrisvasqm.cuadramo.editor
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-
-
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import com.chrisvasqm.cuadramo.R
-import com.chrisvasqm.cuadramo.model.Cuadre
 import com.chrisvasqm.cuadramo.databinding.ActivityEditorBinding
+import com.chrisvasqm.cuadramo.dialogs.PreviewBottomSheetDialogFragment
 import com.chrisvasqm.cuadramo.extensions.clear
 import com.chrisvasqm.cuadramo.extensions.toInt
-import com.chrisvasqm.cuadramo.dialogs.PreviewBottomSheetDialogFragment
+import com.chrisvasqm.cuadramo.model.Cuadre
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
-import kotlinx.android.synthetic.main.toolbar.*
 
 class EditorActivity : AppCompatActivity() {
 
@@ -56,6 +54,8 @@ class EditorActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityEditorBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
