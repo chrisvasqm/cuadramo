@@ -5,16 +5,18 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.chrisvasqm.cuadramo.R
 import com.chrisvasqm.cuadramo.catalog.CatalogActivity
+import com.chrisvasqm.cuadramo.databinding.ActivitySignInBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseUser
-import kotlinx.android.synthetic.main.activity_sign_in.*
 import timber.log.Timber
 
 class SignInActivity : AppCompatActivity(), SignInContract.View {
+
+    private lateinit var binding: ActivitySignInBinding
 
     private val TAG: String = this::class.java.simpleName
 
@@ -27,7 +29,8 @@ class SignInActivity : AppCompatActivity(), SignInContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sign_in)
+        binding = ActivitySignInBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         presenter = SignInPresenter().apply { attach(this@SignInActivity) }
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -37,7 +40,7 @@ class SignInActivity : AppCompatActivity(), SignInContract.View {
 
         client = GoogleSignIn.getClient(this, gso)
 
-        btnSignIn.setOnClickListener { presenter.signIn() }
+        binding.btnSignIn.setOnClickListener { presenter.signIn() }
     }
 
     override fun onDestroy() {
@@ -82,7 +85,7 @@ class SignInActivity : AppCompatActivity(), SignInContract.View {
     }
 
     override fun showMessage(message: String) {
-        Snackbar.make(signInLayout, message, Snackbar.LENGTH_SHORT).show()
+        Snackbar.make(binding.signInLayout, message, Snackbar.LENGTH_SHORT).show()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -92,11 +95,11 @@ class SignInActivity : AppCompatActivity(), SignInContract.View {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
 
             try {
-                val account = task?.getResult(ApiException::class.java)
+                val account = task.getResult(ApiException::class.java)
                 presenter.authWithGoogle(account)
             } catch (exception: ApiException) {
                 Timber.w(TAG, "Google Sign In failed: $exception")
-                Snackbar.make(signInLayout, "Google sign in failed.", Snackbar.LENGTH_LONG).show()
+                Snackbar.make(binding.signInLayout, "Google sign in failed.", Snackbar.LENGTH_LONG).show()
             }
         }
     }

@@ -2,28 +2,29 @@ package com.chrisvasqm.cuadramo.about
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.chrisvasqm.cuadramo.R
-import kotlinx.android.synthetic.main.activity_about.*
+import com.chrisvasqm.cuadramo.databinding.ActivityAboutBinding
 import kotlinx.android.synthetic.main.toolbar.*
 
 class AboutActivity : AppCompatActivity(), AboutContract.View {
+
+    private lateinit var binding: ActivityAboutBinding
 
     private lateinit var router: AboutContract.Router
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_about)
+        binding = ActivityAboutBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         setSupportActionBar(toolbar)
-        displayVersionNumber()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        displayVersionNumber()
+
+        binding.linearGitHubLink.setOnClickListener { goToGitHub() }
+        binding.linearChristianLink.setOnClickListener { goToChristianLink() }
+        binding.linearCarlaLink.setOnClickListener { goToCristalLink() }
+
         router = AboutRouter(this)
-
-        linearGitHubLink.setOnClickListener { goToGitHub() }
-
-        linearChristianLink.setOnClickListener { goToChristianLink() }
-
-        linearCarlaLink.setOnClickListener { goToCristalLink() }
     }
 
     override fun goToGitHub() {
@@ -40,6 +41,6 @@ class AboutActivity : AppCompatActivity(), AboutContract.View {
 
     private fun displayVersionNumber() {
         val packageInfo = this.packageManager.getPackageInfo(packageName, 0)
-        textVersionNumber.text = "v${packageInfo.versionName}"
+        binding.textVersionNumber.text = "v${packageInfo.versionName}"
     }
 }
