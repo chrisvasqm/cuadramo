@@ -11,6 +11,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.FragmentManager
 import com.chrisvasqm.cuadramo.R
 import com.chrisvasqm.cuadramo.data.models.Cuadre
+import com.chrisvasqm.cuadramo.databinding.BottomSheetItemOptionsBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -21,22 +22,26 @@ import timber.log.Timber
 
 class ItemOptionsBottomSheetDialogFragment : BottomSheetDialogFragment() {
 
-    private val TAG = "ItemOptionsBottomSheetDialogFragment"
+    private lateinit var binding: BottomSheetItemOptionsBinding
+
+    private val TAG = this::class.java.simpleName
 
     private var cuadre = Cuadre()
 
     private lateinit var manager: FragmentManager
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.bottom_sheet_item_options, container, false)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = BottomSheetItemOptionsBinding.inflate(inflater, container, false)
 
-        val optionPreview = view.findViewById<LinearLayout>(R.id.optionPreview)
-        optionPreview.setOnClickListener { previewItem() }
+        binding.optionPreview.setOnClickListener { previewItem() }
 
-        val optionDelete = view.findViewById<LinearLayout>(R.id.optionDelete)
-        optionDelete.setOnClickListener { showDeletionDialog() }
+        binding.optionDelete.setOnClickListener { showDeletionDialog() }
 
-        return view
+        return binding.root
     }
 
     fun setCuadre(cuadre: Cuadre) {
@@ -48,15 +53,13 @@ class ItemOptionsBottomSheetDialogFragment : BottomSheetDialogFragment() {
     }
 
     private fun previewItem() {
-        PreviewBottomSheetDialogFragment()
-                .apply {
-                    setCuadre(cuadre)
-                    setManager(manager)
-                    isPreview = true
-                }
-                .show(manager, TAG)
+        PreviewBottomSheetDialogFragment().apply {
+                setCuadre(cuadre)
+                setManager(manager)
+                isPreview = true
+            }.show(manager, TAG)
 
-        // So that the ItemOptionsBottomSheet hides before the next one opens.
+        // To hide the BottomSheet before the next one opens
         dismiss()
     }
 
@@ -66,38 +69,39 @@ class ItemOptionsBottomSheetDialogFragment : BottomSheetDialogFragment() {
         if (userId != null) {
             val database = FirebaseDatabase.getInstance()
             val reference = database.getReference("users/$userId/cuadres")
+            reference.addValueEventListener(object : ValueEventListener {
 
-            reference
-                    .addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    for (child in snapshot.children) {
+                        val currentCuadre = child.getValue(Cuadre::class.java)
+                        if (currentCuadre?.id == cuadre.id) {
+                            child.ref.removeValue()
 
-                        override fun onDataChange(snapshot: DataSnapshot) {
-                            for (child in snapshot.children) {
-                                val currentCuadre = child.getValue(Cuadre::class.java)
-                                if (currentCuadre?.id == cuadre.id) {
-                                    child.ref.removeValue()
-
-                                    // To close the bottom sheet after removing an item.
-                                    dismiss()
-                                    break
-                                }
-                            }
+                            // To close the bottom sheet after removing an item.
+                            dismiss()
+                            break
                         }
+                    }
+                }
 
-                        override fun onCancelled(error: DatabaseError) {
-                            Timber.e("Firebase Database Deletion Error - $error")
-                            Toast.makeText(context!!, "Something went wrong. Try again later.", Toast.LENGTH_SHORT).show()
-                        }
+                override fun onCancelled(error: DatabaseError) {
+                    Timber.e("Firebase Database Deletion Error - $error")
+                    Toast.makeText(
+                        requireContext(),
+                        "Something went wrong. Try again later.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
 
-                    })
+            })
         }
     }
 
     private fun showDeletionDialog() {
-        val dialog = setupDeletionDialog()
-        dialog.show()
+        setupDeletionDialog().show()
     }
 
-    private fun setupDeletionDialog(): AlertDialog.Builder = AlertDialog.Builder(context!!).apply {
+    private fun setupDeletionDialog(): AlertDialog.Builder = AlertDialog.Builder(requireContext()).apply {
         setTitle(R.string.delete)
         setMessage(getString(R.string.not_recover))
         setPositiveButton(R.string.delete) { _: DialogInterface, _: Int ->
