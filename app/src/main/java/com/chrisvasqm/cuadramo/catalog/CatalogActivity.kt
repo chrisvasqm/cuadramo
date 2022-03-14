@@ -11,16 +11,18 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chrisvasqm.cuadramo.R
 import com.chrisvasqm.cuadramo.data.models.Cuadre
+import com.chrisvasqm.cuadramo.databinding.ActivityCatalogBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import kotlinx.android.synthetic.main.activity_catalog.*
 import kotlinx.android.synthetic.main.toolbar.*
 
 class CatalogActivity : AppCompatActivity(), CatalogContract.View {
+
+    private lateinit var binding: ActivityCatalogBinding
 
     private lateinit var auth: FirebaseAuth
 
@@ -36,11 +38,12 @@ class CatalogActivity : AppCompatActivity(), CatalogContract.View {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_catalog)
+        binding = ActivityCatalogBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         setSupportActionBar(toolbar)
+
         presenter = CatalogPresenter().apply { attach(this@CatalogActivity) }
         presenter.loadCatalog()
-        router = CatalogRouter(this)
 
         firebaseDatabase = FirebaseDatabase.getInstance()
         databaseReference = firebaseDatabase.reference
@@ -48,13 +51,14 @@ class CatalogActivity : AppCompatActivity(), CatalogContract.View {
         auth = FirebaseAuth.getInstance()
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build()
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
 
         client = GoogleSignIn.getClient(this, gso)
 
-        fabAdd.setOnClickListener {
+        router = CatalogRouter(this)
+        binding.fabAdd.setOnClickListener {
             router.goToEditorScreen()
         }
     }
@@ -84,11 +88,16 @@ class CatalogActivity : AppCompatActivity(), CatalogContract.View {
 
     private fun setupRecyclerView(cuadres: MutableList<Cuadre>) {
         val animation = AnimationUtils.loadLayoutAnimation(this, R.anim.layout_animation_fall_down)
-        catalogRecyclerView.apply {
+        binding.catalogRecyclerView.apply {
             setHasFixedSize(true)
             adapter = CatalogAdapter(cuadres, supportFragmentManager)
             layoutManager = LinearLayoutManager(this@CatalogActivity)
-            addItemDecoration(DividerItemDecoration(this@CatalogActivity, DividerItemDecoration.VERTICAL))
+            addItemDecoration(
+                DividerItemDecoration(
+                    this@CatalogActivity,
+                    DividerItemDecoration.VERTICAL
+                )
+            )
             layoutAnimation = animation
         }
     }
