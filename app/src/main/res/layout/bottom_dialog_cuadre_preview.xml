@@ -158,10 +158,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
         android:tint="@color/darkGreyBold"
         android:tintMode="src_in"
+        app:layout_constraintBottom_toTopOf="@+id/btnSave"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgMoneyOff"
         app:srcCompat="@drawable/ic_outline_monetization_on_24px" />
@@ -192,14 +193,12 @@
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:text="@string/save"
         android:textColor="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgResult"
         app:rippleColor="@color/colorPrimary" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
