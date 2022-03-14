@@ -3,9 +3,9 @@ package com.chrisvasqm.cuadramo.data.source.user
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
-object UserRepository : UserDataSource {
+class UserService {
 
-    override fun getCurrentUser(): FirebaseUser? {
+    fun getCurrentUser(): FirebaseUser? {
         return FirebaseAuth.getInstance().currentUser
     }
 

@@ -1,6 +1,6 @@
 package com.chrisvasqm.cuadramo.signin
 
-import com.chrisvasqm.cuadramo.data.source.user.UserRepository
+import com.chrisvasqm.cuadramo.data.source.user.UserService
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
@@ -11,7 +11,7 @@ class SignInPresenter : SignInContract.Presenter {
 
     private val auth = FirebaseAuth.getInstance()
 
-    private val repository = UserRepository
+    private val service = UserService()
 
     override fun attach(view: SignInContract.View) {
         this.view = view
@@ -26,7 +26,7 @@ class SignInPresenter : SignInContract.Presenter {
     }
 
     override fun updateUi() {
-        view?.updateUi(repository.getCurrentUser())
+        view?.updateUi(service.getCurrentUser())
     }
 
     override fun authWithGoogle(account: GoogleSignInAccount?) {
