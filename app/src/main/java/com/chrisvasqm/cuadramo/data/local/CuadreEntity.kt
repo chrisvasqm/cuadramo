@@ -13,28 +13,28 @@ data class CuadreEntity(
     val id: Long = 0,
 
     @ColumnInfo(name = "cash")
-    val cash: Int = 0,
+    var cash: Int = 0,
 
     @ColumnInfo(name = "ticketsTotal")
-    val ticketsTotal: Int = 0,
+    var ticketsTotal: Int = 0,
 
     @ColumnInfo(name = "ticketsLeft")
-    val ticketsLeft: Int = 0,
+    var ticketsLeft: Int = 0,
 
     @ColumnInfo(name = "food")
-    val food: Int = 0,
+    var food: Int = 0,
 
     @ColumnInfo(name = "freebies")
-    val freebies: Int = 0,
+    var freebies: Int = 0,
 
     @ColumnInfo(name = "delivery")
-    val delivery: Int = 0,
+    var delivery: Int = 0,
 
     @ColumnInfo(name = "extras")
-    val extras: Int = 0,
+    var extras: Int = 0,
 
     @ColumnInfo(name = "createdAt")
-    val createdAt: Date = getCurrentDateTime()
+    var createdAt: Date = getCurrentDateTime()
 )
 
 fun CuadreEntity.toModel() = Cuadre(

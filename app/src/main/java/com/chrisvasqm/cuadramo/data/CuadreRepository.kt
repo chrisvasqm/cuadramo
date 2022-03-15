@@ -31,7 +31,7 @@ class CuadreRepository @Inject constructor(
     }
 
     suspend fun exists(id: Int): Boolean {
-        return dao.exists(id)
+        return dao.exists(id.toLong())
     }
 
 }

@@ -21,6 +21,6 @@ interface CuadreDao {
     suspend fun delete(cuadre: CuadreEntity)
 
     @Query("SELECT EXISTS(SELECT * FROM cuadres WHERE id = :id)")
-    fun exists(id: Int): Boolean
+    fun exists(id: Long): Boolean
 
 }
