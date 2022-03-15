@@ -68,4 +68,8 @@ dependencies {
     // MultiDex
     implementation 'com.android.support:multidex:2.0.1'
 
+    // ViewModel
+    implementation "androidx.activity:activity-ktx:1.4.0"
+    implementation "androidx.fragment:fragment-ktx:1.4.1"
+
 }
