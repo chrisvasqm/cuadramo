@@ -3,6 +3,8 @@ package com.chrisvasqm.cuadramo.data.local
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.chrisvasqm.cuadramo.data.model.Cuadre
+import com.chrisvasqm.cuadramo.extensions.getCurrentDateTime
 import java.util.*
 
 @Entity(tableName = "cuadres")
@@ -32,5 +34,17 @@ data class CuadreEntity(
     val extras: Int = 0,
 
     @ColumnInfo(name = "createdAt")
-    val createdAt: Date
+    val createdAt: Date = getCurrentDateTime()
+)
+
+fun CuadreEntity.toModel() = Cuadre(
+    id = id,
+    cash = cash,
+    ticketsTotal = ticketsTotal,
+    ticketsLeft = ticketsLeft,
+    food = food,
+    freebies = freebies,
+    delivery = delivery,
+    extras = extras,
+    createdAt = createdAt
 )

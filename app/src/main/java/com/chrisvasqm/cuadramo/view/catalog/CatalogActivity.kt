@@ -8,26 +8,32 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.animation.AnimationUtils
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chrisvasqm.cuadramo.R
-import com.chrisvasqm.cuadramo.view.about.AboutActivity
 import com.chrisvasqm.cuadramo.data.model.Cuadre
 import com.chrisvasqm.cuadramo.databinding.ActivityCatalogBinding
+import com.chrisvasqm.cuadramo.view.about.AboutActivity
 import com.chrisvasqm.cuadramo.view.editor.EditorActivity
 import com.chrisvasqm.cuadramo.view.signin.SignInActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CatalogActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCatalogBinding
 
     private lateinit var auth: FirebaseAuth
+
+    private val viewModel: CatalogViewModel by viewModels()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,7 +45,9 @@ class CatalogActivity : AppCompatActivity() {
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        showCatalog()
+        viewModel.cuadres.observe(this, Observer {
+            setupRecyclerView(it.toMutableList())
+        })
 
         binding.fabAdd.setOnClickListener { goToEditorScreen() }
 
@@ -80,8 +88,6 @@ class CatalogActivity : AppCompatActivity() {
     }
 
     private fun showCatalog() {
-        // TODO: Remove Toast after implementing Room database
-        Toast.makeText(this, "WIP: Removed Firebase Database", Toast.LENGTH_LONG).show()
         setupRecyclerView(mutableListOf())
     }
 

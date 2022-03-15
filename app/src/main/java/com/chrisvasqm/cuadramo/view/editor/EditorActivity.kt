@@ -84,14 +84,13 @@ class EditorActivity : AppCompatActivity() {
 
     private fun getCuadre(): Cuadre {
         return Cuadre(
-            "",
-            binding.inputCash.text.toInt(),
-            binding.inputTicketsTotal.text.toInt(),
-            binding.inputTicketsLeft.text.toInt(),
-            binding.inputFood.text.toInt(),
-            binding.inputFreebies.text.toInt(),
-            binding.inputDelivery.text.toInt(),
-            binding.inputOthers.text.toInt()
+            cash = binding.inputCash.text.toInt(),
+            ticketsTotal = binding.inputTicketsTotal.text.toInt(),
+            ticketsLeft = binding.inputTicketsLeft.text.toInt(),
+            food = binding.inputFood.text.toInt(),
+            freebies = binding.inputFreebies.text.toInt(),
+            delivery = binding.inputDelivery.text.toInt(),
+            extras = binding.inputOthers.text.toInt()
         )
     }
 

@@ -15,18 +15,14 @@ object RoomModule {
 
     @Singleton
     @Provides
-    fun provideDatabase(@ApplicationContext context: Context): Database {
-        return Room.databaseBuilder(
-            context,
-            Database::class.java,
-            "database-cuadramo"
-        ).build()
-    }
+    fun provideDatabase(@ApplicationContext context: Context): AppDatabase = Room.databaseBuilder(
+        context,
+        AppDatabase::class.java,
+        "database-cuadramo"
+    ).build()
 
     @Singleton
     @Provides
-    fun provideCuadreDao(database: Database): CuadreDao {
-        return database.getCuadreDao()
-    }
+    fun provideCuadreDao(database: AppDatabase): CuadreDao = database.getCuadreDao()
 
 }
