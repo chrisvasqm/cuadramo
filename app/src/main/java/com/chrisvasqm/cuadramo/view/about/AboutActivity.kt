@@ -1,4 +1,4 @@
-package com.chrisvasqm.cuadramo.about
+package com.chrisvasqm.cuadramo.view.about
 
 import android.app.Activity
 import android.content.Intent

@@ -33,7 +33,7 @@
                 android:focusable="true"
                 android:focusableInTouchMode="true"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                tools:context=".editor.EditorActivity">
+                tools:context=".view.editor.EditorActivity">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/textInputLayout"

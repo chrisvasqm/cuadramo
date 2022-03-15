@@ -1,4 +1,4 @@
-package com.chrisvasqm.cuadramo.catalog
+package com.chrisvasqm.cuadramo.view.catalog
 
 import android.content.DialogInterface
 import android.content.Intent
@@ -14,11 +14,11 @@ import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chrisvasqm.cuadramo.R
-import com.chrisvasqm.cuadramo.about.AboutActivity
+import com.chrisvasqm.cuadramo.view.about.AboutActivity
 import com.chrisvasqm.cuadramo.data.model.Cuadre
 import com.chrisvasqm.cuadramo.databinding.ActivityCatalogBinding
-import com.chrisvasqm.cuadramo.editor.EditorActivity
-import com.chrisvasqm.cuadramo.signin.SignInActivity
+import com.chrisvasqm.cuadramo.view.editor.EditorActivity
+import com.chrisvasqm.cuadramo.view.signin.SignInActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase

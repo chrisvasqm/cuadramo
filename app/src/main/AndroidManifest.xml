@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".catalog.CatalogActivity"
+            android:name="com.chrisvasqm.cuadramo.view.catalog.CatalogActivity"
             android:exported="true"
             android:label="@string/catalog">
             <intent-filter>
@@ -23,16 +23,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".signin.SignInActivity"
+            android:name="com.chrisvasqm.cuadramo.view.signin.SignInActivity"
             android:theme="@style/SplashTheme" />
         <activity
-            android:name=".editor.EditorActivity"
+            android:name="com.chrisvasqm.cuadramo.view.editor.EditorActivity"
             android:label="@string/editor"
-            android:parentActivityName=".catalog.CatalogActivity" />
+            android:parentActivityName="com.chrisvasqm.cuadramo.view.catalog.CatalogActivity" />
         <activity
-            android:name=".about.AboutActivity"
+            android:name="com.chrisvasqm.cuadramo.view.about.AboutActivity"
             android:label="@string/about"
-            android:parentActivityName=".catalog.CatalogActivity" />
+            android:parentActivityName="com.chrisvasqm.cuadramo.view.catalog.CatalogActivity" />
     </application>
 
 </manifest>

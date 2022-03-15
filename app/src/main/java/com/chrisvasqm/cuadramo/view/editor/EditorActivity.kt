@@ -1,4 +1,4 @@
-package com.chrisvasqm.cuadramo.editor
+package com.chrisvasqm.cuadramo.view.editor
 
 import android.os.Bundle
 import android.text.Editable
@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.chrisvasqm.cuadramo.R
 import com.chrisvasqm.cuadramo.databinding.ActivityEditorBinding
-import com.chrisvasqm.cuadramo.dialogs.PreviewBottomSheetDialogFragment
+import com.chrisvasqm.cuadramo.view.dialogs.PreviewBottomSheetDialogFragment
 import com.chrisvasqm.cuadramo.extensions.clear
 import com.chrisvasqm.cuadramo.extensions.toInt
 import com.chrisvasqm.cuadramo.data.model.Cuadre

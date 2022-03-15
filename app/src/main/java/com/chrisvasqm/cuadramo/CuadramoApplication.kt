@@ -1,7 +1,7 @@
 package com.chrisvasqm.cuadramo
 
 import android.app.Application
-import com.chrisvasqm.cuadramo.logs.ReleaseTree
+import com.chrisvasqm.cuadramo.logger.ReleaseTree
 import timber.log.Timber
 
 class CuadramoApplication : Application() {

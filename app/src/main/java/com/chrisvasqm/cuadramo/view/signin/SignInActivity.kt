@@ -1,10 +1,10 @@
-package com.chrisvasqm.cuadramo.signin
+package com.chrisvasqm.cuadramo.view.signin
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.chrisvasqm.cuadramo.R
-import com.chrisvasqm.cuadramo.catalog.CatalogActivity
+import com.chrisvasqm.cuadramo.view.catalog.CatalogActivity
 import com.chrisvasqm.cuadramo.databinding.ActivitySignInBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient

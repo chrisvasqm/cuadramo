@@ -1,4 +1,4 @@
-package com.chrisvasqm.cuadramo.catalog
+package com.chrisvasqm.cuadramo.view.catalog
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +8,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.chrisvasqm.cuadramo.R
 import com.chrisvasqm.cuadramo.data.model.Cuadre
-import com.chrisvasqm.cuadramo.dialogs.ItemOptionsBottomSheetDialogFragment
+import com.chrisvasqm.cuadramo.view.dialogs.ItemOptionsBottomSheetDialogFragment
 
 class CatalogAdapter(private val cuadres: MutableList<Cuadre>, private val manager: FragmentManager) : RecyclerView.Adapter<CatalogAdapter.ViewHolder>() {
 
