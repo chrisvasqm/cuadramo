@@ -15,7 +15,7 @@ class CuadreRepository @Inject constructor(
     }
 
     suspend fun find(id: Int): Cuadre {
-        return dao.find(id).toModel()
+        return dao.find(id.toLong()).toModel()
     }
 
     suspend fun add(entity: Cuadre) {

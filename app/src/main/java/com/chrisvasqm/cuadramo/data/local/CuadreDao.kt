@@ -1,8 +1,6 @@
 package com.chrisvasqm.cuadramo.data.local
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.chrisvasqm.cuadramo.data.model.Cuadre
 
 @Dao
 interface CuadreDao {
@@ -11,7 +9,7 @@ interface CuadreDao {
     suspend fun getAll(): List<CuadreEntity>
 
     @Query("SELECT * FROM cuadres WHERE id = :id")
-    suspend fun find(id: Int): CuadreEntity
+    suspend fun find(id: Long): CuadreEntity
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(cuadre: CuadreEntity)
