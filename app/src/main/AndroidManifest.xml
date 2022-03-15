@@ -13,9 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".signin.SignInActivity"
-            android:theme="@style/SplashTheme"
-            android:exported="true">
+            android:name=".catalog.CatalogActivity"
+            android:exported="true"
+            android:label="@string/catalog">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,9 +23,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".catalog.CatalogActivity"
-            android:label="@string/catalog"
-            android:parentActivityName=".signin.SignInActivity" />
+            android:name=".signin.SignInActivity"
+            android:label="@string/signin"
+            android:theme="@style/SplashTheme" />
         <activity
             android:name=".editor.EditorActivity"
             android:label="@string/editor"
