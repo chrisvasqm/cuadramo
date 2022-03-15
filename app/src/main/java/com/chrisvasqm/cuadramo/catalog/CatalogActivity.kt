@@ -19,10 +19,9 @@ import com.chrisvasqm.cuadramo.data.model.Cuadre
 import com.chrisvasqm.cuadramo.databinding.ActivityCatalogBinding
 import com.chrisvasqm.cuadramo.editor.EditorActivity
 import com.chrisvasqm.cuadramo.signin.SignInActivity
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class CatalogActivity : AppCompatActivity() {
 
@@ -30,10 +29,9 @@ class CatalogActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
 
-    private lateinit var client: GoogleSignInClient
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         binding = ActivityCatalogBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -43,17 +41,23 @@ class CatalogActivity : AppCompatActivity() {
 
         showCatalog()
 
-        auth = FirebaseAuth.getInstance()
+        binding.fabAdd.setOnClickListener { goToEditorScreen() }
 
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id))
-            .requestEmail()
-            .build()
+        // Redirect user to Sign In screen if they are not logged in
+        auth = Firebase.auth
+        redirectWhenNotLogged()
+    }
 
-        client = GoogleSignIn.getClient(this, gso)
+    override fun onStart() {
+        super.onStart()
+        redirectWhenNotLogged()
+    }
 
-        binding.fabAdd.setOnClickListener {
-            goToEditorScreen()
+    private fun redirectWhenNotLogged() {
+        if (auth.currentUser == null) {
+            startActivity(Intent(this, SignInActivity::class.java))
+            finish()
+            return
         }
     }
 
@@ -61,9 +65,9 @@ class CatalogActivity : AppCompatActivity() {
         Intent(this, EditorActivity::class.java).also { startActivity(it) }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.cuadres_menu, menu)
-        return true
+        return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -75,7 +79,7 @@ class CatalogActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    fun showCatalog() {
+    private fun showCatalog() {
         // TODO: Remove Toast after implementing Room database
         Toast.makeText(this, "WIP: Removed Firebase Database", Toast.LENGTH_LONG).show()
         setupRecyclerView(mutableListOf())
@@ -97,7 +101,7 @@ class CatalogActivity : AppCompatActivity() {
         }
     }
 
-    fun showSignOutDialog() {
+    private fun showSignOutDialog() {
         val dialog = setupSignOutDialog()
         dialog.show()
     }
@@ -106,10 +110,8 @@ class CatalogActivity : AppCompatActivity() {
         setTitle(R.string.sign_out)
         setMessage(getString(R.string.have_to_sign_in_again))
         setPositiveButton(R.string.sign_out) { _: DialogInterface, _: Int ->
-            client.signOut().addOnCompleteListener {
-                auth.signOut()
-                goToSignInScreen()
-            }
+            auth.signOut()
+            goToSignInScreen()
         }
         setNegativeButton(android.R.string.cancel) { _: DialogInterface, _: Int -> }
     }
