@@ -1,4 +1,4 @@
-package com.chrisvasqm.cuadramo.logs
+package com.chrisvasqm.cuadramo.logger
 
 import android.util.Log
 import timber.log.Timber

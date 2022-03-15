@@ -20,6 +20,9 @@ the earnings and expenses of each day, but Cuadramo made her life much simpler.
 4. [RecycleView](https://developer.android.com/guide/topics/ui/layout/recyclerview?gclsrc=aw.ds&gclid=Cj0KCQiAybaRBhDtARIsAIEG3knprRpYtPGxKy_d3HG6Eq2t8DdMmpwh3ERxRnDKyhcjpiIS-Wu2kcAaAg4lEALw_wcB)
 5. [ConstraintLayout](https://developer.android.com/training/constraint-layout)
 6. [CardView](https://developer.android.com/guide/topics/ui/layout/cardview)
+7. [Room](https://developer.android.com/training/data-storage/room)
+8. [Fluent](https://truth.dev/)
+9. [Hilt](https://developer.android.com/training/dependency-injection/hilt-android)
 
 ## Screenshots
 

@@ -1,20 +1,24 @@
-package com.chrisvasqm.cuadramo.about
+package com.chrisvasqm.cuadramo.view.about
 
+import android.app.Activity
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import com.chrisvasqm.cuadramo.R
 import com.chrisvasqm.cuadramo.databinding.ActivityAboutBinding
-import kotlinx.android.synthetic.main.toolbar.*
 
-class AboutActivity : AppCompatActivity(), AboutContract.View {
+class AboutActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAboutBinding
-
-    private lateinit var router: AboutContract.Router
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAboutBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
@@ -23,20 +27,27 @@ class AboutActivity : AppCompatActivity(), AboutContract.View {
         binding.linearGitHubLink.setOnClickListener { goToGitHub() }
         binding.linearChristianLink.setOnClickListener { goToChristianLink() }
         binding.linearCarlaLink.setOnClickListener { goToCristalLink() }
-
-        router = AboutRouter(this)
     }
 
-    override fun goToGitHub() {
-        router.goToGitHub()
+    private fun goToGitHub() {
+        val url = "https://github.com/chrisvasqm/cuadramo"
+        goToLink(this, url)
     }
 
-    override fun goToChristianLink() {
-        router.goToChristianLink()
+    private fun goToChristianLink() {
+        val url = "https://github.com/chrisvasqm"
+        goToLink(this, url)
     }
 
-    override fun goToCristalLink() {
-        router.goToCristalLink()
+    private fun goToCristalLink() {
+        val url = "https://www.behance.net/hipandac"
+        goToLink(this, url)
+    }
+
+    private fun goToLink(activity: Activity, url: String) {
+        Intent(Intent.ACTION_VIEW)
+            .apply { data = Uri.parse(url) }
+            .also { activity.startActivity(it) }
     }
 
     private fun displayVersionNumber() {
