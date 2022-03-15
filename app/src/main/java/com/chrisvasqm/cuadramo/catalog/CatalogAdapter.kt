@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.chrisvasqm.cuadramo.R
-import com.chrisvasqm.cuadramo.model.Cuadre
+import com.chrisvasqm.cuadramo.data.model.Cuadre
 import com.chrisvasqm.cuadramo.dialogs.ItemOptionsBottomSheetDialogFragment
 
 class CatalogAdapter(private val cuadres: MutableList<Cuadre>, private val manager: FragmentManager) : RecyclerView.Adapter<CatalogAdapter.ViewHolder>() {

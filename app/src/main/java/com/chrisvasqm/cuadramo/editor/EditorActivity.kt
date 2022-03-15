@@ -12,7 +12,7 @@ import com.chrisvasqm.cuadramo.databinding.ActivityEditorBinding
 import com.chrisvasqm.cuadramo.dialogs.PreviewBottomSheetDialogFragment
 import com.chrisvasqm.cuadramo.extensions.clear
 import com.chrisvasqm.cuadramo.extensions.toInt
-import com.chrisvasqm.cuadramo.model.Cuadre
+import com.chrisvasqm.cuadramo.data.model.Cuadre
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout

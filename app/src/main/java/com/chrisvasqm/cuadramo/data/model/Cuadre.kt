@@ -1,4 +1,4 @@
-package com.chrisvasqm.cuadramo.model
+package com.chrisvasqm.cuadramo.data.model
 
 import com.chrisvasqm.cuadramo.extensions.getCurrentDateTime
 import java.util.*

@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chrisvasqm.cuadramo.R
 import com.chrisvasqm.cuadramo.about.AboutActivity
-import com.chrisvasqm.cuadramo.model.Cuadre
+import com.chrisvasqm.cuadramo.data.model.Cuadre
 import com.chrisvasqm.cuadramo.databinding.ActivityCatalogBinding
 import com.chrisvasqm.cuadramo.editor.EditorActivity
 import com.chrisvasqm.cuadramo.signin.SignInActivity
