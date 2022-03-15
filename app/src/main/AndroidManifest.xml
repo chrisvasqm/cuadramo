@@ -24,7 +24,6 @@
         </activity>
         <activity
             android:name=".signin.SignInActivity"
-            android:label="@string/signin"
             android:theme="@style/SplashTheme" />
         <activity
             android:name=".editor.EditorActivity"
