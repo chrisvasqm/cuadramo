@@ -6,13 +6,12 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.view.animation.AnimationUtils
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chrisvasqm.cuadramo.R
@@ -45,15 +44,36 @@ class CatalogActivity : AppCompatActivity() {
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        viewModel.cuadres.observe(this, Observer {
-            setupRecyclerView(it.toMutableList())
-        })
+        setupCatalog(mutableListOf())
+        viewModel.cuadres.observe(this) {
+            setupCatalog(it)
+        }
 
         binding.fabAdd.setOnClickListener { goToEditorScreen() }
 
         // Redirect user to Sign In screen if they are not logged in
         auth = Firebase.auth
         redirectWhenNotLogged()
+    }
+
+    private fun setupCatalog(cuadres: List<Cuadre>) {
+        if (cuadres.isNullOrEmpty()) {
+            displayEmptyState()
+            setupRecyclerView(mutableListOf())
+        } else {
+            displayEmptyState(false)
+            setupRecyclerView(cuadres.toMutableList())
+        }
+    }
+
+    private fun displayEmptyState(isDisplayed: Boolean = true) {
+        if (isDisplayed) {
+            binding.catalogRecyclerView.visibility = View.GONE
+            binding.emptyViewLayout.root.visibility = View.VISIBLE
+        } else {
+            binding.emptyViewLayout.root.visibility = View.GONE
+            binding.catalogRecyclerView.visibility = View.VISIBLE
+        }
     }
 
     override fun onStart() {
@@ -85,10 +105,6 @@ class CatalogActivity : AppCompatActivity() {
             R.id.item_about -> goToAboutScreen()
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    private fun showCatalog() {
-        setupRecyclerView(mutableListOf())
     }
 
     private fun setupRecyclerView(cuadres: MutableList<Cuadre>) {
