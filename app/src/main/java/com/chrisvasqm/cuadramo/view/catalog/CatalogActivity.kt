@@ -109,17 +109,15 @@ class CatalogActivity : AppCompatActivity() {
 
     private fun setupRecyclerView(cuadres: MutableList<Cuadre>) {
         val animation = AnimationUtils.loadLayoutAnimation(this, R.anim.layout_animation_fall_down)
+        val decoration = DividerItemDecoration(this@CatalogActivity, DividerItemDecoration.VERTICAL)
+
         binding.catalogRecyclerView.apply {
-            setHasFixedSize(true)
             adapter = CatalogAdapter(cuadres, supportFragmentManager)
             layoutManager = LinearLayoutManager(this@CatalogActivity)
-            addItemDecoration(
-                DividerItemDecoration(
-                    this@CatalogActivity,
-                    DividerItemDecoration.VERTICAL
-                )
-            )
             layoutAnimation = animation
+
+            setHasFixedSize(true)
+            addItemDecoration(decoration)
         }
     }
 
