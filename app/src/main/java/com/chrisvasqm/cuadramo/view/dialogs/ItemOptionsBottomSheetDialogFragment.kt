@@ -51,9 +51,7 @@ class ItemOptionsBottomSheetDialogFragment : BottomSheetDialogFragment() {
     }
 
     private fun previewItem() {
-        PreviewBottomSheetDialogFragment().apply {
-            setCuadre(cuadre)
-            setManager(manager)
+        PreviewBottomSheetDialogFragment(cuadre).apply {
             isPreview = true
         }.show(manager, TAG)
 
