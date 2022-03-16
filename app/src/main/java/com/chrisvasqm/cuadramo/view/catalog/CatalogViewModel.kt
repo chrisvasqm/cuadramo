@@ -21,9 +21,7 @@ class CatalogViewModel @Inject constructor(
         get() = _cuadres
 
     fun loadData() {
-        viewModelScope.launch {
-            _cuadres.value = repository.all()
-        }
+        viewModelScope.launch { _cuadres.value = repository.all() }
     }
 
 }
