@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import com.chrisvasqm.cuadramo.R
 import com.chrisvasqm.cuadramo.data.model.Cuadre
 import com.chrisvasqm.cuadramo.databinding.BottomSheetItemOptionsBinding
@@ -61,10 +60,6 @@ class ItemOptionsBottomSheetDialogFragment : BottomSheetDialogFragment() {
         dismiss()
     }
 
-    private fun deleteItem() {
-        viewModel.delete(cuadre)
-    }
-
     private fun showDeletionDialog() {
         setupDeletionDialog().show()
     }
@@ -77,8 +72,14 @@ class ItemOptionsBottomSheetDialogFragment : BottomSheetDialogFragment() {
                 deleteItem()
                 dismiss()
             }
-            setNegativeButton(android.R.string.cancel) { _: DialogInterface, _: Int -> }
+            setNegativeButton(android.R.string.cancel) { _: DialogInterface, _: Int ->
+                dismiss()
+            }
         }
+
+    private fun deleteItem() {
+        viewModel.delete(cuadre)
+    }
 
 
 }
