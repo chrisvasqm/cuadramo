@@ -21,7 +21,6 @@ class CatalogViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            repository.add(Cuadre())
             _cuadres.value = repository.all()
         }
     }
