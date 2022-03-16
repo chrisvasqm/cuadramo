@@ -32,4 +32,10 @@ class CatalogViewModel @Inject constructor(
         }
     }
 
+    fun save(cuadre: Cuadre) {
+        viewModelScope.launch {
+            repository.add(cuadre)
+        }
+    }
+
 }

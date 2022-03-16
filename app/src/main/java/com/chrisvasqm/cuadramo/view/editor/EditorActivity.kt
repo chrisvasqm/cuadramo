@@ -10,7 +10,9 @@ import com.chrisvasqm.cuadramo.data.model.Cuadre
 import com.chrisvasqm.cuadramo.databinding.ActivityEditorBinding
 import com.chrisvasqm.cuadramo.extensions.toInt
 import com.chrisvasqm.cuadramo.view.dialogs.PreviewBottomSheetDialogFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class EditorActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityEditorBinding
@@ -58,9 +60,7 @@ class EditorActivity : AppCompatActivity() {
     }
 
     private fun showPreview() {
-        PreviewBottomSheetDialogFragment()
-            .apply { setCuadre(createCuadre()) }
-            .show(supportFragmentManager, TAG)
+        PreviewBottomSheetDialogFragment(createCuadre()).show(supportFragmentManager, TAG)
     }
 
 }
