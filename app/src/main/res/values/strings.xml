@@ -40,4 +40,6 @@
     <string name="christian_v_squez" translatable="false">Christian Vásquez</string>
     <string name="not_recover">You will not be able to recover this cuadre.</string>
     <string name="edit">Edit</string>
+    <string name="nothing_to_see_here">Nothing to see here</string>
+    <string name="tap_the_plus_button_to_start">Tap on the + button to start</string>
 </resources>
