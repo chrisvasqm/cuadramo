@@ -11,6 +11,7 @@ import androidx.fragment.app.activityViewModels
 import com.chrisvasqm.cuadramo.R
 import com.chrisvasqm.cuadramo.data.model.Cuadre
 import com.chrisvasqm.cuadramo.databinding.BottomSheetItemOptionsBinding
+import com.chrisvasqm.cuadramo.view.catalog.CatalogViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,7 +26,7 @@ class ItemOptionsBottomSheetDialogFragment : BottomSheetDialogFragment() {
 
     private lateinit var manager: FragmentManager
 
-    private val viewModel: ItemOptionsViewModel by activityViewModels()
+    private val viewModel: CatalogViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -78,7 +79,7 @@ class ItemOptionsBottomSheetDialogFragment : BottomSheetDialogFragment() {
         }
 
     private fun deleteItem() {
-        viewModel.delete(cuadre)
+        viewModel.remove(cuadre)
     }
 
 

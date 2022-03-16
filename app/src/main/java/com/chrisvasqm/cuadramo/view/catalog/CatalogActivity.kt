@@ -46,7 +46,6 @@ class CatalogActivity : AppCompatActivity() {
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        viewModel.loadData()
         viewModel.cuadres.observe(this) {
             setupCatalog(it)
         }
