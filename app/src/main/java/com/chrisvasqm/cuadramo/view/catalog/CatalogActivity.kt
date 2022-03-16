@@ -44,9 +44,9 @@ class CatalogActivity : AppCompatActivity() {
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        setupCatalog(mutableListOf())
+        viewModel.loadData()
         viewModel.cuadres.observe(this) {
-            setupCatalog(it)
+            setupCatalog(it.toList())
         }
 
         binding.fabAdd.setOnClickListener { goToEditorScreen() }
