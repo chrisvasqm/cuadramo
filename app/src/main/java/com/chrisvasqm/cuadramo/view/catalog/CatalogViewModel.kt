@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.chrisvasqm.cuadramo.data.CuadreRepository
+import com.chrisvasqm.cuadramo.data.local.CuadreEntity
 import com.chrisvasqm.cuadramo.data.model.Cuadre
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -19,11 +20,8 @@ class CatalogViewModel @Inject constructor(
     val cuadres: LiveData<List<Cuadre>>
         get() = _cuadres
 
-    fun getAllCuadres() {
-        viewModelScope.launch {
-            val cuadres = repository.all()
-            _cuadres.postValue(cuadres)
-        }
+    fun loadData() {
+        viewModelScope.launch { _cuadres.value = repository.all() }
     }
 
 }
