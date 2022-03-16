@@ -6,8 +6,8 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.chrisvasqm.cuadramo.data.local.AppDatabase
 import com.chrisvasqm.cuadramo.data.local.CuadreDao
-import com.chrisvasqm.cuadramo.data.local.CuadreEntity
-import com.google.common.truth.Truth.*
+import com.chrisvasqm.cuadramo.data.model.Cuadre
+import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Before
@@ -38,7 +38,7 @@ class CuadreDatabaseTests {
 
     @Test
     fun getAll_WhenDatabaseIsEmpty_IsNotEmpty() = runBlocking {
-        val cuadre = CuadreEntity()
+        val cuadre = Cuadre()
 
         dao.insert(cuadre)
         val isNotEmpty = dao.getAll().isNotEmpty()
@@ -54,18 +54,18 @@ class CuadreDatabaseTests {
     @Test
     fun find_ExistingData_ReturnsData() = runBlocking {
         val id = 1L
-        val cuadre = CuadreEntity(id = id)
+        val cuadre = Cuadre(id = id)
         dao.insert(cuadre)
 
         val actual = dao.find(id)
 
         assertThat(actual).isNotNull()
-        assertThat(actual).isInstanceOf(CuadreEntity::class.java)
+        assertThat(actual).isInstanceOf(Cuadre::class.java)
     }
 
     @Test
     fun insert_NewData_IsInserted() = runBlocking {
-        val cuadre = CuadreEntity(id = 1)
+        val cuadre = Cuadre(id = 1)
         dao.insert(cuadre)
 
         assertThat(dao.getAll()).isNotEmpty()
@@ -73,7 +73,7 @@ class CuadreDatabaseTests {
 
     @Test
     fun insert_ExistingData_GetsReplaced() = runBlocking {
-        val cuadre = CuadreEntity(id = 1)
+        val cuadre = Cuadre(id = 1)
         dao.insert(cuadre)
 
         val expected = 100
@@ -87,7 +87,7 @@ class CuadreDatabaseTests {
     @Test
     fun update_ExistingData_ReturnsUpdatedData() = runBlocking {
         val id = 1L
-        val cuadre = CuadreEntity(id = id)
+        val cuadre = Cuadre(id = id)
         dao.insert(cuadre)
 
         cuadre.cash = 100
@@ -100,7 +100,7 @@ class CuadreDatabaseTests {
     @Test
     fun update_NonExistingData_ReturnsNoError() = runBlocking {
         val id = 1L
-        val cuadre = CuadreEntity(id = id)
+        val cuadre = Cuadre(id = id)
         dao.insert(cuadre)
 
         cuadre.cash = 100
@@ -109,7 +109,7 @@ class CuadreDatabaseTests {
 
     @Test
     fun delete_WithExistingData_ReturnsEmptyTable() = runBlocking {
-        val cuadre = CuadreEntity(id = 1)
+        val cuadre = Cuadre(id = 1)
         dao.insert(cuadre)
 
         dao.delete(cuadre)
@@ -119,7 +119,7 @@ class CuadreDatabaseTests {
 
     @Test
     fun delete_WithoutData_ReturnsNoError() = runBlocking {
-        val cuadre = CuadreEntity(id = 1)
+        val cuadre = Cuadre(id = 1)
 
         dao.delete(cuadre)
     }
@@ -132,7 +132,7 @@ class CuadreDatabaseTests {
     @Test
     fun exists_WithData_ReturnsTrue() = runBlocking {
         val id = 1L
-        val cuadre = CuadreEntity(id = id)
+        val cuadre = Cuadre(id = id)
         dao.insert(cuadre)
 
         assertThat(dao.exists(id)).isTrue()

@@ -34,6 +34,8 @@ class CatalogActivity : AppCompatActivity() {
 
     private val viewModel: CatalogViewModel by viewModels()
 
+    private lateinit var catalogAdapter: CatalogAdapter
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
@@ -44,9 +46,8 @@ class CatalogActivity : AppCompatActivity() {
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        viewModel.loadData()
         viewModel.cuadres.observe(this) {
-            setupCatalog(it.toList())
+            setupCatalog(it)
         }
 
         binding.fabAdd.setOnClickListener { goToEditorScreen() }
@@ -108,19 +109,19 @@ class CatalogActivity : AppCompatActivity() {
     }
 
     private fun setupRecyclerView(cuadres: MutableList<Cuadre>) {
+        val recyclerView = binding.catalogRecyclerView
+
+        catalogAdapter = CatalogAdapter(cuadres, supportFragmentManager)
+        recyclerView.adapter = catalogAdapter
+
+        val layoutManager = LinearLayoutManager(this)
+        recyclerView.layoutManager = layoutManager
+
+        val decoration = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
+        recyclerView.addItemDecoration(decoration)
+
         val animation = AnimationUtils.loadLayoutAnimation(this, R.anim.layout_animation_fall_down)
-        binding.catalogRecyclerView.apply {
-            setHasFixedSize(true)
-            adapter = CatalogAdapter(cuadres, supportFragmentManager)
-            layoutManager = LinearLayoutManager(this@CatalogActivity)
-            addItemDecoration(
-                DividerItemDecoration(
-                    this@CatalogActivity,
-                    DividerItemDecoration.VERTICAL
-                )
-            )
-            layoutAnimation = animation
-        }
+        recyclerView.layoutAnimation = animation
     }
 
     private fun showSignOutDialog() {
