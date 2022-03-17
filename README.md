@@ -22,8 +22,6 @@ the earnings and expenses of each day, but Cuadramo made her life much simpler.
 6. [Fluent](https://truth.dev/)
 7. [Hilt](https://developer.android.com/training/dependency-injection/hilt-android)
 
-## Screenshots
+## Demo
 
-<img src="/screenshots/1.png" width="200"/> <img src="/screenshots/2.png" width="200"/> 
-<img src="/screenshots/3.png" width="200"/> <img src="/screenshots/4.png" width="200"/> 
-<img src="/screenshots/5.png" width="200" />
+https://user-images.githubusercontent.com/8799179/158723849-3ce790d9-dd3d-4908-a29d-631a9f96ffb3.mp4
