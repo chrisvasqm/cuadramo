@@ -38,10 +38,6 @@ class CatalogAdapter(
         holder.catalogItemConstraintLayout.setOnClickListener { displayOptions(cuadre) }
     }
 
-    override fun registerAdapterDataObserver(observer: RecyclerView.AdapterDataObserver) {
-        super.registerAdapterDataObserver(observer)
-    }
-
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val catalogItemConstraintLayout: ConstraintLayout =
             view.findViewById(R.id.catalogItemConstraintLayout)
@@ -51,10 +47,7 @@ class CatalogAdapter(
     }
 
     private fun displayOptions(cuadre: Cuadre) {
-        ItemOptionsBottomSheetDialogFragment().apply {
-            setCuadre(cuadre)
-            setManager(manager)
-        }.show(manager, TAG)
+        ItemOptionsBottomSheetDialogFragment(cuadre).show(manager, TAG)
     }
 
 }

@@ -19,7 +19,7 @@ class EditorActivity : AppCompatActivity() {
 
     private val TAG = this::class.java.simpleName
 
-    private val cuadrarWatcher = object : TextWatcher {
+    private val calculateWatcher = object : TextWatcher {
         override fun afterTextChanged(s: Editable?) {}
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
@@ -32,19 +32,50 @@ class EditorActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityEditorBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setupCuadrarButtonWatcher()
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        binding.btnCuadrar.setOnClickListener { showPreview() }
+        val editingCuadre = intent.getParcelableExtra<Cuadre>("Cuadre")
+        if (editingCuadre != null)
+            fillOutForm(editingCuadre)
 
-        setupCuadrarButtonWatcher()
+        binding.btnCuadrar.setOnClickListener {
+            if (editingCuadre != null) {
+                updateCuadre(editingCuadre)
+                showPreview(editingCuadre)
+            }
+            else {
+                showPreview(createCuadre())
+            }
+        }
+    }
+
+    private fun updateCuadre(cuadre: Cuadre) {
+        cuadre.cash = binding.inputCash.text.toInt()
+        cuadre.ticketsTotal = binding.inputTicketsTotal.text.toInt()
+        cuadre.ticketsLeft = binding.inputTicketsLeft.text.toInt()
+        cuadre.food = binding.inputFood.text.toInt()
+        cuadre.freebies = binding.inputFreebies.text.toInt()
+        cuadre.delivery = binding.inputDelivery.text.toInt()
+        cuadre.others = binding.inputOthers.text.toInt()
+    }
+
+    private fun fillOutForm(editingCuadre: Cuadre) {
+        binding.inputCash.setText(editingCuadre.cash.toString())
+        binding.inputTicketsTotal.setText(editingCuadre.ticketsTotal.toString())
+        binding.inputTicketsLeft.setText(editingCuadre.ticketsLeft.toString())
+        binding.inputFood.setText(editingCuadre.food.toString())
+        binding.inputFreebies.setText(editingCuadre.freebies.toString())
+        binding.inputDelivery.setText(editingCuadre.delivery.toString())
+        binding.inputOthers.setText(editingCuadre.others.toString())
     }
 
     private fun setupCuadrarButtonWatcher() {
-        binding.inputTicketsTotal.addTextChangedListener(cuadrarWatcher)
-        binding.inputTicketsLeft.addTextChangedListener(cuadrarWatcher)
+        binding.inputTicketsTotal.addTextChangedListener(calculateWatcher)
+        binding.inputTicketsLeft.addTextChangedListener(calculateWatcher)
     }
 
     private fun createCuadre(): Cuadre {
@@ -55,12 +86,12 @@ class EditorActivity : AppCompatActivity() {
             food = binding.inputFood.text.toInt(),
             freebies = binding.inputFreebies.text.toInt(),
             delivery = binding.inputDelivery.text.toInt(),
-            extras = binding.inputOthers.text.toInt()
+            others = binding.inputOthers.text.toInt()
         )
     }
 
-    private fun showPreview() {
-        PreviewBottomSheetDialogFragment(createCuadre()).show(supportFragmentManager, TAG)
+    private fun showPreview(cuadre: Cuadre) {
+        PreviewBottomSheetDialogFragment(cuadre).show(supportFragmentManager, TAG)
     }
 
 }

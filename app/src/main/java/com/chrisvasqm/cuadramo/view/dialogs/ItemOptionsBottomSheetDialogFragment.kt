@@ -1,6 +1,7 @@
 package com.chrisvasqm.cuadramo.view.dialogs
 
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,17 +13,16 @@ import com.chrisvasqm.cuadramo.R
 import com.chrisvasqm.cuadramo.data.model.Cuadre
 import com.chrisvasqm.cuadramo.databinding.BottomSheetItemOptionsBinding
 import com.chrisvasqm.cuadramo.view.catalog.CatalogViewModel
+import com.chrisvasqm.cuadramo.view.editor.EditorActivity
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ItemOptionsBottomSheetDialogFragment : BottomSheetDialogFragment() {
+class ItemOptionsBottomSheetDialogFragment(private val cuadre: Cuadre) : BottomSheetDialogFragment() {
 
     private lateinit var binding: BottomSheetItemOptionsBinding
 
     private val TAG = this::class.java.simpleName
-
-    private var cuadre = Cuadre()
 
     private lateinit var manager: FragmentManager
 
@@ -37,21 +37,21 @@ class ItemOptionsBottomSheetDialogFragment : BottomSheetDialogFragment() {
 
         binding.optionPreview.setOnClickListener { previewItem() }
 
+        binding.optionEdit.setOnClickListener { goToEditorScreen() }
+
         binding.optionDelete.setOnClickListener { showDeletionDialog() }
 
         return binding.root
     }
 
-    fun setCuadre(cuadre: Cuadre) {
-        this.cuadre = cuadre
-    }
-
-    fun setManager(manager: FragmentManager) {
-        this.manager = manager
+    private fun goToEditorScreen() {
+        val intent = Intent(requireActivity(), EditorActivity::class.java)
+        intent.putExtra("Cuadre", cuadre)
+        startActivity(intent)
     }
 
     private fun previewItem() {
-        PreviewBottomSheetDialogFragment(cuadre).apply {
+        PreviewBottomSheetDialogFragment(this.cuadre).apply {
             isPreview = true
         }.show(manager, TAG)
 
@@ -77,7 +77,7 @@ class ItemOptionsBottomSheetDialogFragment : BottomSheetDialogFragment() {
         }
 
     private fun deleteItem() {
-        viewModel.remove(cuadre)
+        viewModel.remove(this.cuadre)
     }
 
 
