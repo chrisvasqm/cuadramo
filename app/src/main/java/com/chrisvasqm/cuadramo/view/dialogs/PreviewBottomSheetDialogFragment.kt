@@ -1,25 +1,28 @@
 package com.chrisvasqm.cuadramo.view.dialogs
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.activityViewModels
 import com.chrisvasqm.cuadramo.data.model.Cuadre
 import com.chrisvasqm.cuadramo.databinding.BottomDialogCuadrePreviewBinding
 import com.chrisvasqm.cuadramo.extensions.toString
+import com.chrisvasqm.cuadramo.view.catalog.CatalogActivity
+import com.chrisvasqm.cuadramo.view.catalog.CatalogViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import dagger.hilt.android.AndroidEntryPoint
 
-class PreviewBottomSheetDialogFragment : BottomSheetDialogFragment() {
+class PreviewBottomSheetDialogFragment(
+    private val cuadre: Cuadre
+) : BottomSheetDialogFragment() {
 
     private lateinit var binding: BottomDialogCuadrePreviewBinding
 
-    private var cuadre = Cuadre()
-
-    private lateinit var manager: FragmentManager
-
     var isPreview = false
+
+    private val viewModel: CatalogViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,8 +38,8 @@ class PreviewBottomSheetDialogFragment : BottomSheetDialogFragment() {
         binding.textResult.text = cuadre.revenue.toString()
 
         binding.btnSave.setOnClickListener {
-            // TODO: Replace once the Room database is implemented
-            Toast.makeText(requireContext(), "To be added", Toast.LENGTH_LONG).show()
+            viewModel.save(cuadre)
+            goToCatalogScreen()
         }
 
         // Hide the save button when the user is just checking an existing cuadre.
@@ -47,12 +50,10 @@ class PreviewBottomSheetDialogFragment : BottomSheetDialogFragment() {
         return binding.root
     }
 
-    fun setCuadre(cuadre: Cuadre) {
-        this.cuadre = cuadre
-    }
-
-    fun setManager(manager: FragmentManager) {
-        this.manager = manager
+    private fun goToCatalogScreen() {
+        val intent = Intent(requireActivity(), CatalogActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
     }
 
 }

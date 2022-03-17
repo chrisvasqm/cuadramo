@@ -37,4 +37,6 @@
     <string name="made_by">Hecho por</string>
     <string name="not_recover">No podrás recuperar este cuadre.</string>
     <string name="edit">Editar</string>
+    <string name="nothing_to_see_here">Nada que ver por aquí</string>
+    <string name="tap_the_plus_button_to_start">Toca el boton de + para empezar</string>
 </resources>

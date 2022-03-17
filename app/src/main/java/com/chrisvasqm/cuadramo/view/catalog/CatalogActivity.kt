@@ -1,18 +1,14 @@
 package com.chrisvasqm.cuadramo.view.catalog
 
-import android.content.DialogInterface
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.view.animation.AnimationUtils
-import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chrisvasqm.cuadramo.R
@@ -20,10 +16,6 @@ import com.chrisvasqm.cuadramo.data.model.Cuadre
 import com.chrisvasqm.cuadramo.databinding.ActivityCatalogBinding
 import com.chrisvasqm.cuadramo.view.about.AboutActivity
 import com.chrisvasqm.cuadramo.view.editor.EditorActivity
-import com.chrisvasqm.cuadramo.view.signin.SignInActivity
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -31,10 +23,9 @@ class CatalogActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCatalogBinding
 
-    private lateinit var auth: FirebaseAuth
-
     private val viewModel: CatalogViewModel by viewModels()
 
+    private lateinit var catalogAdapter: CatalogAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
@@ -45,27 +36,30 @@ class CatalogActivity : AppCompatActivity() {
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        viewModel.cuadres.observe(this, Observer {
-            setupRecyclerView(it.toMutableList())
-        })
+        viewModel.cuadres.observe(this) {
+            setupCatalog(it)
+        }
 
         binding.fabAdd.setOnClickListener { goToEditorScreen() }
-
-        // Redirect user to Sign In screen if they are not logged in
-        auth = Firebase.auth
-        redirectWhenNotLogged()
     }
 
-    override fun onStart() {
-        super.onStart()
-        redirectWhenNotLogged()
+    private fun setupCatalog(cuadres: List<Cuadre>) {
+        if (cuadres.isNullOrEmpty()) {
+            displayEmptyState()
+            setupRecyclerView(mutableListOf())
+        } else {
+            displayEmptyState(false)
+            setupRecyclerView(cuadres.toMutableList())
+        }
     }
 
-    private fun redirectWhenNotLogged() {
-        if (auth.currentUser == null) {
-            startActivity(Intent(this, SignInActivity::class.java))
-            finish()
-            return
+    private fun displayEmptyState(isDisplayed: Boolean = true) {
+        if (isDisplayed) {
+            binding.catalogRecyclerView.visibility = View.GONE
+            binding.emptyViewLayout.root.visibility = View.VISIBLE
+        } else {
+            binding.emptyViewLayout.root.visibility = View.GONE
+            binding.catalogRecyclerView.visibility = View.VISIBLE
         }
     }
 
@@ -74,70 +68,35 @@ class CatalogActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.cuadres_menu, menu)
+        menuInflater.inflate(R.menu.catalog_menu, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.item_sign_out -> showSignOutDialog()
-            R.id.item_rate -> goToPlayStore()
             R.id.item_about -> goToAboutScreen()
         }
         return super.onOptionsItemSelected(item)
     }
 
-    private fun showCatalog() {
-        setupRecyclerView(mutableListOf())
-    }
-
     private fun setupRecyclerView(cuadres: MutableList<Cuadre>) {
+        val recyclerView = binding.catalogRecyclerView
+
+        catalogAdapter = CatalogAdapter(cuadres, supportFragmentManager)
+        recyclerView.adapter = catalogAdapter
+
+        val layoutManager = LinearLayoutManager(this)
+        recyclerView.layoutManager = layoutManager
+
+        val decoration = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
+        recyclerView.addItemDecoration(decoration)
+
         val animation = AnimationUtils.loadLayoutAnimation(this, R.anim.layout_animation_fall_down)
-        binding.catalogRecyclerView.apply {
-            setHasFixedSize(true)
-            adapter = CatalogAdapter(cuadres, supportFragmentManager)
-            layoutManager = LinearLayoutManager(this@CatalogActivity)
-            addItemDecoration(
-                DividerItemDecoration(
-                    this@CatalogActivity,
-                    DividerItemDecoration.VERTICAL
-                )
-            )
-            layoutAnimation = animation
-        }
-    }
-
-    private fun showSignOutDialog() {
-        val dialog = setupSignOutDialog()
-        dialog.show()
-    }
-
-    private fun setupSignOutDialog(): AlertDialog.Builder = AlertDialog.Builder(this).apply {
-        setTitle(R.string.sign_out)
-        setMessage(getString(R.string.have_to_sign_in_again))
-        setPositiveButton(R.string.sign_out) { _: DialogInterface, _: Int ->
-            auth.signOut()
-            goToSignInScreen()
-        }
-        setNegativeButton(android.R.string.cancel) { _: DialogInterface, _: Int -> }
-    }
-
-    private fun goToPlayStore() {
-        val url = "https://play.google.com/store/apps/details?id=com.chrisvasqm.cuadramo"
-        Intent(Intent.ACTION_VIEW)
-            .apply { data = Uri.parse(url) }
-            .also { startActivity(it) }
+        recyclerView.layoutAnimation = animation
     }
 
     private fun goToAboutScreen() {
         Intent(this, AboutActivity::class.java).also { startActivity(it) }
     }
-
-    private fun goToSignInScreen() {
-        Intent(this, SignInActivity::class.java)
-            .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-            .also { startActivity(it) }
-    }
-
 
 }

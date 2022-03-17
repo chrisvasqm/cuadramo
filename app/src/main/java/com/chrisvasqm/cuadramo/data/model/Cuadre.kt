@@ -1,42 +1,53 @@
 package com.chrisvasqm.cuadramo.data.model
 
-import com.chrisvasqm.cuadramo.data.local.CuadreEntity
+import android.os.Parcelable
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.chrisvasqm.cuadramo.extensions.getCurrentDateTime
+import kotlinx.parcelize.Parcelize
 import java.util.*
 
 private const val TICKET_COST = 50
 
+@Parcelize
+@Entity(tableName = "cuadres")
 data class Cuadre(
-    var id: Long = 0,
+    @PrimaryKey(autoGenerate = true)
+    val id: Long = 0,
+
+    @ColumnInfo(name = "cash")
     var cash: Int = 0,
+
+    @ColumnInfo(name = "ticketsTotal")
     var ticketsTotal: Int = 0,
+
+    @ColumnInfo(name = "ticketsLeft")
     var ticketsLeft: Int = 0,
+
+    @ColumnInfo(name = "food")
     var food: Int = 0,
+
+    @ColumnInfo(name = "freebies")
     var freebies: Int = 0,
+
+    @ColumnInfo(name = "delivery")
     var delivery: Int = 0,
-    var extras: Int = 0,
+
+    @ColumnInfo(name = "extras")
+    var others: Int = 0,
+
+    @ColumnInfo(name = "createdAt")
     var createdAt: Date = getCurrentDateTime()
-) {
+) : Parcelable {
 
     val revenue: Int
         get() = (cash + ticketsSold * TICKET_COST) - expenses
 
     val expenses: Int
-        get() = food + delivery + extras + (freebies * TICKET_COST)
+        get() = food + delivery + others + (freebies * TICKET_COST)
 
     val ticketsSold: Int
         get() = ticketsTotal - ticketsLeft
 
 }
-
-fun Cuadre.toDomain() = CuadreEntity(
-    id = id,
-    cash = cash,
-    ticketsTotal = ticketsTotal,
-    ticketsLeft = ticketsLeft,
-    food = food,
-    freebies = freebies,
-    delivery = delivery,
-    extras = extras,
-    createdAt = createdAt
-)

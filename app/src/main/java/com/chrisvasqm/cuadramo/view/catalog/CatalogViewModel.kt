@@ -15,14 +15,26 @@ class CatalogViewModel @Inject constructor(
     private val repository: CuadreRepository
 ) : ViewModel() {
 
-    private var _cuadres = MutableLiveData<List<Cuadre>>()
-    val cuadres: LiveData<List<Cuadre>>
+    private var _cuadres = MutableLiveData<MutableList<Cuadre>>()
+    val cuadres: LiveData<MutableList<Cuadre>>
         get() = _cuadres
 
-    fun getAllCuadres() {
+    init {
         viewModelScope.launch {
-            val cuadres = repository.all()
-            _cuadres.postValue(cuadres)
+            _cuadres.value = repository.all()
+        }
+    }
+
+    fun remove(cuadre: Cuadre) {
+        viewModelScope.launch {
+            repository.remove(cuadre)
+            _cuadres.postValue(repository.all())
+        }
+    }
+
+    fun save(cuadre: Cuadre) {
+        viewModelScope.launch {
+            repository.add(cuadre)
         }
     }
 
