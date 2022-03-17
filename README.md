@@ -14,15 +14,13 @@ the earnings and expenses of each day, but Cuadramo made her life much simpler.
 
 ## Libraries used
 
-1. [Firebase Realtime-Database](https://firebase.google.com/docs/database)
-2. [Firebase Auth](https://firebase.google.com/docs/auth)
-3. [Timber](https://github.com/JakeWharton/timber)
-4. [RecycleView](https://developer.android.com/guide/topics/ui/layout/recyclerview?gclsrc=aw.ds&gclid=Cj0KCQiAybaRBhDtARIsAIEG3knprRpYtPGxKy_d3HG6Eq2t8DdMmpwh3ERxRnDKyhcjpiIS-Wu2kcAaAg4lEALw_wcB)
-5. [ConstraintLayout](https://developer.android.com/training/constraint-layout)
-6. [CardView](https://developer.android.com/guide/topics/ui/layout/cardview)
-7. [Room](https://developer.android.com/training/data-storage/room)
-8. [Fluent](https://truth.dev/)
-9. [Hilt](https://developer.android.com/training/dependency-injection/hilt-android)
+1. [Timber](https://github.com/JakeWharton/timber)
+2. [RecycleView](https://developer.android.com/guide/topics/ui/layout/recyclerview?gclsrc=aw.ds&gclid=Cj0KCQiAybaRBhDtARIsAIEG3knprRpYtPGxKy_d3HG6Eq2t8DdMmpwh3ERxRnDKyhcjpiIS-Wu2kcAaAg4lEALw_wcB)
+3. [ConstraintLayout](https://developer.android.com/training/constraint-layout)
+4. [CardView](https://developer.android.com/guide/topics/ui/layout/cardview)
+5. [Room](https://developer.android.com/training/data-storage/room)
+6. [Fluent](https://truth.dev/)
+7. [Hilt](https://developer.android.com/training/dependency-injection/hilt-android)
 
 ## Screenshots
 
