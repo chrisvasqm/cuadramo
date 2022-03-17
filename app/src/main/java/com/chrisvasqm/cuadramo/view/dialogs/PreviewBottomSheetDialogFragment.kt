@@ -39,9 +39,7 @@ class PreviewBottomSheetDialogFragment(
 
         binding.btnSave.setOnClickListener {
             viewModel.save(cuadre)
-            val intent = Intent(requireActivity(), CatalogActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(intent)
+            goToCatalogScreen()
         }
 
         // Hide the save button when the user is just checking an existing cuadre.
@@ -50,6 +48,12 @@ class PreviewBottomSheetDialogFragment(
         }
 
         return binding.root
+    }
+
+    private fun goToCatalogScreen() {
+        val intent = Intent(requireActivity(), CatalogActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
     }
 
 }

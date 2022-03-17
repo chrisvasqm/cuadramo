@@ -32,18 +32,35 @@ class EditorActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityEditorBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setupCuadrarButtonWatcher()
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        binding.btnCuadrar.setOnClickListener { showPreview() }
-
         val editingCuadre = intent.getParcelableExtra<Cuadre>("Cuadre")
         if (editingCuadre != null)
             fillOutForm(editingCuadre)
 
-        setupCuadrarButtonWatcher()
+        binding.btnCuadrar.setOnClickListener {
+            if (editingCuadre != null) {
+                updateCuadre(editingCuadre)
+                showPreview(editingCuadre)
+            }
+            else {
+                showPreview(createCuadre())
+            }
+        }
+    }
+
+    private fun updateCuadre(cuadre: Cuadre) {
+        cuadre.cash = binding.inputCash.text.toInt()
+        cuadre.ticketsTotal = binding.inputTicketsTotal.text.toInt()
+        cuadre.ticketsLeft = binding.inputTicketsLeft.text.toInt()
+        cuadre.food = binding.inputFood.text.toInt()
+        cuadre.freebies = binding.inputFreebies.text.toInt()
+        cuadre.delivery = binding.inputDelivery.text.toInt()
+        cuadre.others = binding.inputOthers.text.toInt()
     }
 
     private fun fillOutForm(editingCuadre: Cuadre) {
@@ -73,8 +90,8 @@ class EditorActivity : AppCompatActivity() {
         )
     }
 
-    private fun showPreview() {
-        PreviewBottomSheetDialogFragment(createCuadre()).show(supportFragmentManager, TAG)
+    private fun showPreview(cuadre: Cuadre) {
+        PreviewBottomSheetDialogFragment(cuadre).show(supportFragmentManager, TAG)
     }
 
 }
