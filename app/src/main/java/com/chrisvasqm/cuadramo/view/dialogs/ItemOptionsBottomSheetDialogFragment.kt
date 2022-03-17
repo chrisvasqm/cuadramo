@@ -18,13 +18,14 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ItemOptionsBottomSheetDialogFragment(private val cuadre: Cuadre) : BottomSheetDialogFragment() {
+class ItemOptionsBottomSheetDialogFragment(
+    private val cuadre: Cuadre,
+    private val manager: FragmentManager
+) : BottomSheetDialogFragment() {
 
     private lateinit var binding: BottomSheetItemOptionsBinding
 
     private val TAG = this::class.java.simpleName
-
-    private lateinit var manager: FragmentManager
 
     private val viewModel: CatalogViewModel by activityViewModels()
 
@@ -51,11 +52,10 @@ class ItemOptionsBottomSheetDialogFragment(private val cuadre: Cuadre) : BottomS
     }
 
     private fun previewItem() {
-        PreviewBottomSheetDialogFragment(this.cuadre).apply {
-            isPreview = true
-        }.show(manager, TAG)
+        PreviewBottomSheetDialogFragment(cuadre)
+            .apply { isPreview = true }
+            .show(manager, TAG)
 
-        // To hide the BottomSheet before the next one opens
         dismiss()
     }
 
