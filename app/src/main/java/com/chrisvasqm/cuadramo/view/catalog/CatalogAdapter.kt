@@ -47,7 +47,7 @@ class CatalogAdapter(
     }
 
     private fun displayOptions(cuadre: Cuadre) {
-        ItemOptionsBottomSheetDialogFragment(cuadre).show(manager, TAG)
+        ItemOptionsBottomSheetDialogFragment(cuadre, manager).show(manager, TAG)
     }
 
 }
