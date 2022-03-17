@@ -102,7 +102,6 @@ class CatalogActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.item_sign_out -> showSignOutDialog()
-            R.id.item_rate -> goToPlayStore()
             R.id.item_about -> goToAboutScreen()
         }
         return super.onOptionsItemSelected(item)
@@ -137,13 +136,6 @@ class CatalogActivity : AppCompatActivity() {
             goToSignInScreen()
         }
         setNegativeButton(android.R.string.cancel) { _: DialogInterface, _: Int -> }
-    }
-
-    private fun goToPlayStore() {
-        val url = "https://play.google.com/store/apps/details?id=com.chrisvasqm.cuadramo"
-        Intent(Intent.ACTION_VIEW)
-            .apply { data = Uri.parse(url) }
-            .also { startActivity(it) }
     }
 
     private fun goToAboutScreen() {
