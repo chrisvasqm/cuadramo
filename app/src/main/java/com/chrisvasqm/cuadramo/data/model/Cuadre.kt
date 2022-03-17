@@ -1,13 +1,16 @@
 package com.chrisvasqm.cuadramo.data.model
 
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.chrisvasqm.cuadramo.extensions.getCurrentDateTime
+import kotlinx.parcelize.Parcelize
 import java.util.*
 
 private const val TICKET_COST = 50
 
+@Parcelize
 @Entity(tableName = "cuadres")
 data class Cuadre(
     @PrimaryKey(autoGenerate = true)
@@ -32,17 +35,17 @@ data class Cuadre(
     var delivery: Int = 0,
 
     @ColumnInfo(name = "extras")
-    var extras: Int = 0,
+    var others: Int = 0,
 
     @ColumnInfo(name = "createdAt")
     var createdAt: Date = getCurrentDateTime()
-) {
+) : Parcelable {
 
     val revenue: Int
         get() = (cash + ticketsSold * TICKET_COST) - expenses
 
     val expenses: Int
-        get() = food + delivery + extras + (freebies * TICKET_COST)
+        get() = food + delivery + others + (freebies * TICKET_COST)
 
     val ticketsSold: Int
         get() = ticketsTotal - ticketsLeft
