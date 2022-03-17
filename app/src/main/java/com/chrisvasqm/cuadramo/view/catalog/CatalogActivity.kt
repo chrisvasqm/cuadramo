@@ -1,15 +1,12 @@
 package com.chrisvasqm.cuadramo.view.catalog
 
-import android.content.DialogInterface
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.animation.AnimationUtils
 import androidx.activity.viewModels
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -19,10 +16,6 @@ import com.chrisvasqm.cuadramo.data.model.Cuadre
 import com.chrisvasqm.cuadramo.databinding.ActivityCatalogBinding
 import com.chrisvasqm.cuadramo.view.about.AboutActivity
 import com.chrisvasqm.cuadramo.view.editor.EditorActivity
-import com.chrisvasqm.cuadramo.view.signin.SignInActivity
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -30,12 +23,9 @@ class CatalogActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCatalogBinding
 
-    private lateinit var auth: FirebaseAuth
-
     private val viewModel: CatalogViewModel by viewModels()
 
     private lateinit var catalogAdapter: CatalogAdapter
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
@@ -51,10 +41,6 @@ class CatalogActivity : AppCompatActivity() {
         }
 
         binding.fabAdd.setOnClickListener { goToEditorScreen() }
-
-        // Redirect user to Sign In screen if they are not logged in
-        auth = Firebase.auth
-        redirectWhenNotLogged()
     }
 
     private fun setupCatalog(cuadres: List<Cuadre>) {
@@ -77,31 +63,17 @@ class CatalogActivity : AppCompatActivity() {
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-        redirectWhenNotLogged()
-    }
-
-    private fun redirectWhenNotLogged() {
-        if (auth.currentUser == null) {
-            startActivity(Intent(this, SignInActivity::class.java))
-            finish()
-            return
-        }
-    }
-
     private fun goToEditorScreen() {
         Intent(this, EditorActivity::class.java).also { startActivity(it) }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.cuadres_menu, menu)
+        menuInflater.inflate(R.menu.catalog_menu, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.item_sign_out -> showSignOutDialog()
             R.id.item_about -> goToAboutScreen()
         }
         return super.onOptionsItemSelected(item)
@@ -123,30 +95,8 @@ class CatalogActivity : AppCompatActivity() {
         recyclerView.layoutAnimation = animation
     }
 
-    private fun showSignOutDialog() {
-        val dialog = setupSignOutDialog()
-        dialog.show()
-    }
-
-    private fun setupSignOutDialog(): AlertDialog.Builder = AlertDialog.Builder(this).apply {
-        setTitle(R.string.sign_out)
-        setMessage(getString(R.string.have_to_sign_in_again))
-        setPositiveButton(R.string.sign_out) { _: DialogInterface, _: Int ->
-            auth.signOut()
-            goToSignInScreen()
-        }
-        setNegativeButton(android.R.string.cancel) { _: DialogInterface, _: Int -> }
-    }
-
     private fun goToAboutScreen() {
         Intent(this, AboutActivity::class.java).also { startActivity(it) }
     }
-
-    private fun goToSignInScreen() {
-        Intent(this, SignInActivity::class.java)
-            .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-            .also { startActivity(it) }
-    }
-
 
 }
