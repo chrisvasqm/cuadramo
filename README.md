@@ -24,4 +24,4 @@ the earnings and expenses of each day, but Cuadramo made her life much simpler.
 
 ## Demo
 
-<img src="/images/demo.gif" width="300"/>
+<img src="/images/demo.gif" width="200"/>
