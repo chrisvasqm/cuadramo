@@ -19,7 +19,7 @@ class EditorActivity : AppCompatActivity() {
 
     private val TAG = this::class.java.simpleName
 
-    private val cuadrarWatcher = object : TextWatcher {
+    private val calculateWatcher = object : TextWatcher {
         override fun afterTextChanged(s: Editable?) {}
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
@@ -39,12 +39,26 @@ class EditorActivity : AppCompatActivity() {
 
         binding.btnCuadrar.setOnClickListener { showPreview() }
 
+        val editingCuadre = intent.getParcelableExtra<Cuadre>("Cuadre")
+        if (editingCuadre != null)
+            fillOutForm(editingCuadre)
+
         setupCuadrarButtonWatcher()
     }
 
+    private fun fillOutForm(editingCuadre: Cuadre) {
+        binding.inputCash.setText(editingCuadre.cash.toString())
+        binding.inputTicketsTotal.setText(editingCuadre.ticketsTotal.toString())
+        binding.inputTicketsLeft.setText(editingCuadre.ticketsLeft.toString())
+        binding.inputFood.setText(editingCuadre.food.toString())
+        binding.inputFreebies.setText(editingCuadre.freebies.toString())
+        binding.inputDelivery.setText(editingCuadre.delivery.toString())
+        binding.inputOthers.setText(editingCuadre.others.toString())
+    }
+
     private fun setupCuadrarButtonWatcher() {
-        binding.inputTicketsTotal.addTextChangedListener(cuadrarWatcher)
-        binding.inputTicketsLeft.addTextChangedListener(cuadrarWatcher)
+        binding.inputTicketsTotal.addTextChangedListener(calculateWatcher)
+        binding.inputTicketsLeft.addTextChangedListener(calculateWatcher)
     }
 
     private fun createCuadre(): Cuadre {
@@ -55,7 +69,7 @@ class EditorActivity : AppCompatActivity() {
             food = binding.inputFood.text.toInt(),
             freebies = binding.inputFreebies.text.toInt(),
             delivery = binding.inputDelivery.text.toInt(),
-            extras = binding.inputOthers.text.toInt()
+            others = binding.inputOthers.text.toInt()
         )
     }
 
