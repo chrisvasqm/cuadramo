@@ -16,13 +16,11 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ItemOptionsBottomSheetDialogFragment : BottomSheetDialogFragment() {
+class ItemOptionsBottomSheetDialogFragment(private val cuadre: Cuadre) : BottomSheetDialogFragment() {
 
     private lateinit var binding: BottomSheetItemOptionsBinding
 
     private val TAG = this::class.java.simpleName
-
-    private var cuadre = Cuadre()
 
     private lateinit var manager: FragmentManager
 
@@ -42,16 +40,8 @@ class ItemOptionsBottomSheetDialogFragment : BottomSheetDialogFragment() {
         return binding.root
     }
 
-    fun setCuadre(cuadre: Cuadre) {
-        this.cuadre = cuadre
-    }
-
-    fun setManager(manager: FragmentManager) {
-        this.manager = manager
-    }
-
     private fun previewItem() {
-        PreviewBottomSheetDialogFragment(cuadre).apply {
+        PreviewBottomSheetDialogFragment(this.cuadre).apply {
             isPreview = true
         }.show(manager, TAG)
 
@@ -77,7 +67,7 @@ class ItemOptionsBottomSheetDialogFragment : BottomSheetDialogFragment() {
         }
 
     private fun deleteItem() {
-        viewModel.remove(cuadre)
+        viewModel.remove(this.cuadre)
     }
 
 
