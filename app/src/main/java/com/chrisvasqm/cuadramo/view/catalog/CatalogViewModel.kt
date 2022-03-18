@@ -19,23 +19,16 @@ class CatalogViewModel @Inject constructor(
     val cuadres: LiveData<MutableList<Cuadre>>
         get() = _cuadres
 
-    init {
-        viewModelScope.launch {
-            _cuadres.value = repository.all()
-        }
+    fun fetchCuadres() {
+        viewModelScope.launch { _cuadres.postValue(repository.all()) }
     }
 
     fun remove(cuadre: Cuadre) {
-        viewModelScope.launch {
-            repository.remove(cuadre)
-            _cuadres.postValue(repository.all())
-        }
+        viewModelScope.launch { repository.remove(cuadre) }
     }
 
     fun save(cuadre: Cuadre) {
-        viewModelScope.launch {
-            repository.add(cuadre)
-        }
+        viewModelScope.launch { repository.add(cuadre) }
     }
 
 }
