@@ -19,7 +19,7 @@ class CatalogViewModel @Inject constructor(
     val cuadres: LiveData<MutableList<Cuadre>>
         get() = _cuadres
 
-    fun fetchCuadres() {
+    fun fetch() {
         viewModelScope.launch { _cuadres.postValue(repository.all()) }
     }
 
