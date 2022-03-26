@@ -17,7 +17,7 @@ class CuadreTests {
     }
 
     @Test
-    fun expenses_OneFreebieAndFoodAndDeliveryAndOthers_ReturnsMinusThreeHundredFifty() {
+    fun expenses_WithAllExpenses_ReturnsNegativeThreeHundredFifty() {
         val cuadre = Cuadre(
             freebies = 1,
             food = 100,
@@ -31,7 +31,7 @@ class CuadreTests {
     }
 
     @Test
-    fun revenue_TenTicketsSoldWithOneFreebieAndFoodAndDeliveryAndOthers_ReturnsFifty() {
+    fun revenue_TenTicketsSoldAndAllExpenses_ReturnsFifty() {
         val cuadre = Cuadre(
             ticketsTotal = 10,
             ticketsLeft = 0,
@@ -45,6 +45,5 @@ class CuadreTests {
 
         assertThat(actual).isEqualTo(150)
     }
-
 
 }
