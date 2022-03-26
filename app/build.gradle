@@ -13,7 +13,7 @@ android {
         minSdkVersion 19
         targetSdkVersion 32
         versionCode 1
-        versionName "2.0.0"
+        versionName "2.0.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         setProperty("archivesBaseName", "cuadramo")

@@ -8,8 +8,6 @@ import com.chrisvasqm.cuadramo.extensions.getCurrentDateTime
 import kotlinx.parcelize.Parcelize
 import java.util.*
 
-private const val TICKET_COST = 50
-
 @Parcelize
 @Entity(tableName = "cuadres")
 data class Cuadre(
@@ -51,3 +49,5 @@ data class Cuadre(
         get() = ticketsTotal - ticketsLeft
 
 }
+
+private const val TICKET_COST = 50
