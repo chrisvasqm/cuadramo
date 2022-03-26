@@ -3,14 +3,20 @@ package com.chrisvasqm.cuadramo
 import androidx.test.core.app.launchActivity
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu
-import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.platform.app.InstrumentationRegistry
 import com.chrisvasqm.cuadramo.view.catalog.CatalogActivity
+import org.junit.Before
 import org.junit.Test
 
 class CatalogActivityTests {
+
+    @Before
+    fun setUp() {
+        InstrumentationRegistry.getInstrumentation().targetContext.deleteDatabase("database-cuadramo")
+    }
 
     @Test
     fun catalogActivity_WithOutItems_EmptyViewIsDisplayed() {
@@ -28,6 +34,29 @@ class CatalogActivityTests {
                 .perform(click())
 
             onView(withId(R.id.textVersionNumber))
+                .check(matches(isDisplayed()))
+        }
+    }
+
+    @Test
+    fun catalog_CreateNewCuadre_IsDisplayed() {
+        launchActivity<CatalogActivity>().use {
+            onView(withId(R.id.fabAdd))
+                .perform(click())
+
+            onView(withId(R.id.inputTicketsTotal))
+                .perform(typeText("2"))
+
+            onView(withId(R.id.inputTicketsLeft))
+                .perform(typeText("1"), closeSoftKeyboard())
+
+            onView(withId(R.id.btnCuadrar))
+                .perform(click())
+
+            onView(withId(R.id.btnSave))
+                .perform(click())
+
+            onView(withId(R.id.catalogRecyclerView))
                 .check(matches(isDisplayed()))
         }
     }
