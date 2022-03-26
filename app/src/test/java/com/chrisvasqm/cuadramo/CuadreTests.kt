@@ -1,51 +1,22 @@
 package com.chrisvasqm.cuadramo
 
-import assertk.assert
-import assertk.assertions.isEqualTo
 import com.chrisvasqm.cuadramo.data.model.Cuadre
+import com.google.common.truth.Truth
+import com.google.common.truth.Truth.*
 import org.junit.Test
+
+import org.junit.Assert.*
+
 
 class CuadreTests {
 
     @Test
-    fun revenue_WithAllValues_ReturnsThreeThousandSevenHundred() {
-        val cuadre = Cuadre(
-                "",
-                100,
-                100,
-                20,
-                150,
-                2,
-                50,
-                100
-        )
+    fun ticketsSold_TwoTicketsTotalAndOneLeft_ReturnsOne() {
+        val cuadre = Cuadre(ticketsTotal = 2, ticketsLeft = 1)
 
-        assert(cuadre.revenue).isEqualTo(3700)
+        val actual = cuadre.ticketsSold
+
+        assertThat(actual).isEqualTo(1)
     }
 
-    @Test
-    fun expenses_WithAllValues_ReturnsFourHundred() {
-        val cuadre = Cuadre(
-                "",
-                100,
-                100,
-                20,
-                150,
-                2,
-                50,
-                100
-        )
-
-        assert(cuadre.expenses).isEqualTo(400)
-    }
-
-    @Test
-    fun ticketsSold_WithTwentyOutOfAHundred_ReturnsEighty() {
-        val cuadre = Cuadre(
-                ticketsTotal = 100,
-                ticketsLeft = 20
-        )
-
-        assert(cuadre.ticketsSold).isEqualTo(80)
-    }
 }
