@@ -13,6 +13,7 @@
         <activity
             android:name="com.chrisvasqm.cuadramo.view.catalog.CatalogActivity"
             android:exported="true"
+            android:theme="@style/SplashTheme"
             android:label="@string/catalog">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
