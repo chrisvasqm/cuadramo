@@ -12,7 +12,10 @@ import androidx.test.platform.app.InstrumentationRegistry
 import com.chrisvasqm.cuadramo.view.catalog.CatalogActivity
 import org.junit.Before
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.junit.runners.JUnit4
 
+@RunWith(JUnit4::class)
 class CatalogActivityTests {
 
     @Before
@@ -23,7 +26,7 @@ class CatalogActivityTests {
     @Test
     fun catalogActivity_WithOutItems_EmptyViewIsDisplayed() {
         launchActivity<CatalogActivity>().use {
-            onView(withId(R.id.fabAdd)).check(matches(isDisplayed()))
+            onView(withId(R.id.imageViewEmpty)).check(matches(isDisplayed()))
         }
     }
 
