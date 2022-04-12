@@ -80,6 +80,30 @@ class CatalogActivityTests {
         }
     }
 
+    @Test
+    fun catalog_ExistingCuadre_CanBeDeleted() {
+        launchActivity<CatalogActivity>().use {
+            createCuadre()
+
+            onView(withId(R.id.catalogRecyclerView))
+                .perform(
+                    RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
+                        0,
+                        click()
+                    )
+                )
+
+            onView(withId(R.id.textDelete))
+                .perform(click())
+
+            onView(withText("DELETE"))
+                .perform(click())
+
+            onView(withId(R.id.imageViewEmpty))
+                .check(matches(isDisplayed()))
+        }
+    }
+
     private fun createCuadre() {
         onView(withId(R.id.fabAdd))
             .perform(click())
