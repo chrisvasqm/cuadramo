@@ -92,9 +92,6 @@ class CatalogActivity : AppCompatActivity() {
 
         val decoration = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
         recyclerView.addItemDecoration(decoration)
-
-        val animation = AnimationUtils.loadLayoutAnimation(this, R.anim.layout_animation_fall_down)
-        recyclerView.layoutAnimation = animation
     }
 
     private fun goToAboutScreen() {
