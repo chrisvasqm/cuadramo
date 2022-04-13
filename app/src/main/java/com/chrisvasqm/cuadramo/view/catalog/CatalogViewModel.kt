@@ -1,12 +1,10 @@
 package com.chrisvasqm.cuadramo.view.catalog
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.chrisvasqm.cuadramo.data.CuadreRepository
 import com.chrisvasqm.cuadramo.data.model.Cuadre
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -15,12 +13,16 @@ class CatalogViewModel @Inject constructor(
     private val repository: CuadreRepository
 ) : ViewModel() {
 
-    private var _cuadres = MutableLiveData<MutableList<Cuadre>>()
-    val cuadres: LiveData<MutableList<Cuadre>>
+    private var _cuadres = MutableLiveData<List<Cuadre>>()
+    val cuadres: LiveData<List<Cuadre>>
         get() = _cuadres
 
     fun fetch() {
-        viewModelScope.launch { _cuadres.postValue(repository.all()) }
+        viewModelScope.launch {
+            repository.getAll().collect {
+                _cuadres.value = it
+            }
+        }
     }
 
     fun remove(cuadre: Cuadre) {

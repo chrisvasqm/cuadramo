@@ -2,12 +2,13 @@ package com.chrisvasqm.cuadramo.data.local
 
 import androidx.room.*
 import com.chrisvasqm.cuadramo.data.model.Cuadre
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface CuadreDao {
 
     @Query("SELECT * FROM cuadres ORDER BY createdAt DESC")
-    suspend fun getAll(): MutableList<Cuadre>
+    fun getAll(): Flow<List<Cuadre>>
 
     @Query("SELECT * FROM cuadres WHERE id = :id")
     suspend fun find(id: Long): Cuadre

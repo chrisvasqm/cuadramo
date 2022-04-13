@@ -69,7 +69,6 @@ class ItemOptionsBottomSheetDialogFragment(
             setMessage(getString(R.string.not_recover))
             setPositiveButton(R.string.delete) { _: DialogInterface, _: Int ->
                 viewModel.remove(cuadre)
-                viewModel.fetch()
                 dismiss()
             }
             setNegativeButton(android.R.string.cancel) { _: DialogInterface, _: Int ->
