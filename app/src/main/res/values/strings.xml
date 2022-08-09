@@ -42,4 +42,7 @@
     <string name="edit">Edit</string>
     <string name="nothing_to_see_here">Nothing to see here</string>
     <string name="tap_the_plus_button_to_start">Tap on the + button to start</string>
+    <string name="url_github">https://github.com/chrisvasqm/cuadramo</string>
+    <string name="url_profile_chris">https://github.com/chrisvasqm</string>
+    <string name="url_profile_carla">https://www.behance.net/hipandac</string>
 </resources>

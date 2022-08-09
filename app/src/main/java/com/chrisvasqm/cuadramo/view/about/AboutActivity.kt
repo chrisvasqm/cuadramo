@@ -30,18 +30,15 @@ class AboutActivity : AppCompatActivity() {
     }
 
     private fun goToGitHub() {
-        val url = "https://github.com/chrisvasqm/cuadramo"
-        goToLink(this, url)
+        goToLink(this, getString(R.string.url_github))
     }
 
     private fun goToChristianLink() {
-        val url = "https://github.com/chrisvasqm"
-        goToLink(this, url)
+        goToLink(this, getString(R.string.url_profile_chris))
     }
 
     private fun goToCristalLink() {
-        val url = "https://www.behance.net/hipandac"
-        goToLink(this, url)
+        goToLink(this, getString(R.string.url_profile_carla))
     }
 
     private fun goToLink(activity: Activity, url: String) {
