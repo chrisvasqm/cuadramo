@@ -32,6 +32,7 @@ class CatalogActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityCatalogBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        title = resources.getString(R.string.catalog)
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
