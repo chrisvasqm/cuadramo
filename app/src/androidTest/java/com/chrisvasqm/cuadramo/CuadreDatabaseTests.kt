@@ -8,6 +8,7 @@ import com.chrisvasqm.cuadramo.data.local.AppDatabase
 import com.chrisvasqm.cuadramo.data.local.CuadreDao
 import com.chrisvasqm.cuadramo.data.model.Cuadre
 import com.google.common.truth.Truth.assertThat
+import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Before
@@ -32,7 +33,7 @@ class CuadreDatabaseTests {
 
     @Test
     fun getAll_NoDataInsertedYet_ReturnsEmpty() = runBlocking {
-        val isEmpty = dao.getAll().isEmpty()
+        val isEmpty = dao.getAll().toList().isEmpty()
         assert(isEmpty)
     }
 
@@ -41,7 +42,7 @@ class CuadreDatabaseTests {
         val cuadre = Cuadre()
 
         dao.insert(cuadre)
-        val isNotEmpty = dao.getAll().isNotEmpty()
+        val isNotEmpty = dao.getAll().toList().isNotEmpty()
 
         assert(isNotEmpty)
     }
@@ -68,7 +69,7 @@ class CuadreDatabaseTests {
         val cuadre = Cuadre(id = 1)
         dao.insert(cuadre)
 
-        assertThat(dao.getAll()).isNotEmpty()
+        assertThat(dao.getAll().toList()).isNotEmpty()
     }
 
     @Test
@@ -114,7 +115,7 @@ class CuadreDatabaseTests {
 
         dao.delete(cuadre)
 
-        assertThat(dao.getAll()).isEmpty()
+        assertThat(dao.getAll().toList()).isEmpty()
     }
 
     @Test
